@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chosen 2026 | Jesus Youth Teens Ministry</title>
+    <meta name="description"
+        content="An Encounter with Jesus | A Christ-Centered Life. Join us for Chosen 2026 at AKJM School, Kanjirappally. April 13-16, 2026.">
+
+    <!-- Fonts -->
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=gambarino@400&f[]=ranade@100,200,300,400,500,700,800,900&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="assets/Preloader.png" alt="Holy Spirit Pigeon" class="pigeon-loader">
+            <p class="preloader-caption">Come Holy Spirit, fill our hearts...</p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <header class="dark-bg" id="hero">
+        <div class="hero-carousel">
+            <div class="carousel-slide active"
+                style="background-image: linear-gradient(rgba(12, 12, 12, 0.7), rgba(12, 12, 12, 0.7)), url('assets/img1.jpg');">
+            </div>
+            <div class="carousel-slide"
+                style="background-image: linear-gradient(rgba(12, 12, 12, 0.7), rgba(12, 12, 12, 0.7)), url('assets/img2.jpg');">
+            </div>
+            <div class="carousel-slide"
+                style="background-image: linear-gradient(rgba(12, 12, 12, 0.7), rgba(12, 12, 12, 0.7)), url('assets/img3.jpg');">
+            </div>
+            <div class="carousel-slide"
+                style="background-image: linear-gradient(rgba(12, 12, 12, 0.7), rgba(12, 12, 12, 0.7)), url('assets/img4.JPG');">
+            </div>
+            <div class="carousel-slide"
+                style="background-image: linear-gradient(rgba(12, 12, 12, 0.7), rgba(12, 12, 12, 0.7)), url('assets/img5.JPG');">
+            </div>
+        </div>
+
+        <nav>
+            <div class="nav-container">
+                <img src="assets/Chosen logo- White.png" alt="Chosen Logo" class="logo">
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#schedule">Schedule</a>
+                    <a href="#venue">Venue</a>
+                    <a href="#register" class="btn btn-primary small">Register</a>
+                </div>
+            </div>
+        </nav>
+
+        <section class="hero-content">
+            <div class="reveal">
+                <h4 class="gold-text">Chosen 2026</h4>
+                <h1>AN ENCOUNTER <br class="mobile-break">WITH JESUS</h1>
+                <p class="tagline">A Christ-Centered Life</p>
+                <div class="hero-bottom-wrapper">
+                    <div class="hero-details">
+                        <span><span class="gold-text">Date:</span> April 13 – 16, 2026</span>
+                        <span><span class="gold-text">Venue:</span> AKJM School, Kanjirappally</span>
+                    </div>
+                    <div class="hero-actions">
+                        <a href="#register" class="btn btn-primary">Register Now</a>
+                        <a href="#about" class="btn btn-outline">Know More</a>
+                    </div>
+                    <div class="carousel-dots">
+                        <span class="dot active"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </header>
+
+    <!-- Verse Section -->
+    <section class="verse-section reveal">
+        <div class="center-text max-800">
+            <blockquote class="sacred-quote">
+                "He calls his own sheep by name and leads them out."
+                <cite>John 10:3</cite>
+            </blockquote>
+        </div>
+    </section>
+
+    <!-- Community Intercession Section -->
+    <section id="intercession" class="reveal">
+        <div class="intercession-container center-text">
+            <h2 class="section-title">Community Intercession</h2>
+            <div class="divider center"></div>
+
+            <div class="grand-total-box">
+                <span class="total-label">Total Intercessions Offered</span>
+                <div class="total-count" id="grand-total-count">...</div>
+            </div>
+
+            <p class="sub-text">Join our community in prayer. Every heart, every prayer counts.</p>
+
+            <div class="intercession-grid">
+                <!-- Hail Mary -->
+                <div class="intercession-card" data-prayer="Hail Mary">
+                    <div class="card-icon">🌸</div>
+                    <h3>Hail Mary</h3>
+                    <div class="count" id="count-hail-mary">...</div>
+                    <div class="prayer-btns">
+                        <button onclick="submitPrayer('Hail Mary', 1)">+1</button>
+                        <button onclick="submitPrayer('Hail Mary', 2)">+2</button>
+                        <button onclick="submitPrayer('Hail Mary', 5)">+5</button>
+                    </div>
+                </div>
+
+                <!-- Our Father -->
+                <div class="intercession-card" data-prayer="Our Father">
+                    <div class="card-icon">🙏</div>
+                    <h3>Our Father</h3>
+                    <div class="count" id="count-our-father">...</div>
+                    <div class="prayer-btns">
+                        <button onclick="submitPrayer('Our Father', 1)">+1</button>
+                        <button onclick="submitPrayer('Our Father', 2)">+2</button>
+                        <button onclick="submitPrayer('Our Father', 5)">+5</button>
+                    </div>
+                </div>
+
+                <!-- Holy Mass -->
+                <div class="intercession-card" data-prayer="Holy Mass">
+                    <div class="card-icon">⛪</div>
+                    <h3>Holy Mass</h3>
+                    <div class="count" id="count-holy-mass">...</div>
+                    <div class="prayer-btns">
+                        <button onclick="submitPrayer('Holy Mass', 1)">+1</button>
+                        <button onclick="submitPrayer('Holy Mass', 2)">+2</button>
+                        <button onclick="submitPrayer('Holy Mass', 5)">+5</button>
+                    </div>
+                </div>
+
+                <!-- Fasting -->
+                <div class="intercession-card" data-prayer="Fasting">
+                    <div class="card-icon">🍞</div>
+                    <h3>Fasting</h3>
+                    <div class="count" id="count-fasting">...</div>
+                    <div class="prayer-btns">
+                        <button onclick="submitPrayer('Fasting', 1)">+1</button>
+                        <button onclick="submitPrayer('Fasting', 2)">+2</button>
+                        <button onclick="submitPrayer('Fasting', 5)">+5</button>
+                    </div>
+                </div>
+            </div>
+            <div id="prayer-toast" class="toast">Thank you for praying</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="reveal">
+        <div class="section-grid">
+            <div class="text-content">
+                <h2 class="section-title">About the Program</h2>
+                <div class="divider"></div>
+                <p>Chosen 2026 is the premier Jesus Youth Teens Ministry program designed specifically for teenagers to
+                    encounter the living Christ. Our mission is to help young hearts find their purpose and growth in a
+                    Christ-centered life through spiritual formation, fellowship, and joyful witness.</p>
+                <p>Now in its <strong>4th successful year</strong>, Chosen continues to be a transformative journey for
+                    students across the region, building on the grace and testimony of the past three years.</p>
+            </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-num">3+</span>
+                    <span class="stat-label">Years of Impact</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-num">2026</span>
+                    <span class="stat-label">4th Edition</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Who Can Attend -->
+    <section id="eligibility" class="dark-bg reveal">
+        <div class="container">
+            <h2 class="center-text">Who Can Attend?</h2>
+            <div class="eligibility-content">
+                <div class="eligibility-card">
+                    <div class="card-icon">🎓</div>
+                    <h3>Students</h3>
+                    <p>Open to all students from <strong>Class 8 to 12</strong>.</p>
+                </div>
+                <div class="eligibility-card">
+                    <div class="card-icon">✨</div>
+                    <h3>Open Heart</h3>
+                    <p>No prior experience required—just a heart open to encounter Jesus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Program Highlights -->
+    <section id="highlights" class="reveal">
+        <h2 class="center-text">Program Highlights</h2>
+        <div class="divider center"></div>
+        <div class="highlights-grid">
+            <div class="highlight-item">
+                <div class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 2v20M2 12h20"></path>
+                        <circle cx="12" cy="12" r="10"></circle>
+                    </svg>
+                </div>
+                <h3>Eucharistic Adoration</h3>
+                <p>A quiet time of profound encounter and intimate prayer with the Blessed Sacrament.</p>
+            </div>
+            <div class="highlight-item">
+                <div class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        <path d="M12 7v5"></path>
+                        <path d="M10 9h4"></path>
+                    </svg>
+                </div>
+                <h3>Holy Mass & Confession</h3>
+                <p>The source and summit of our faith, celebrated with devotion, alongside the healing grace of
+                    God's mercy through Reconciliation.</p>
+            </div>
+            <div class="highlight-item">
+                <div class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"></path>
+                        <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+                        <line x1="12" y1="19" x2="12" y2="23"></line>
+                        <line x1="8" y1="23" x2="16" y2="23"></line>
+                    </svg>
+                </div>
+                <h3>Spirit-filled Talks</h3>
+                <p>Inspiring sessions led by speakers who share powerful testimonies and biblical insights.</p>
+            </div>
+            <div class="highlight-item">
+                <div class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M9 18V5l12-2v13"></path>
+                        <circle cx="6" cy="18" r="3"></circle>
+                        <circle cx="18" cy="16" r="3"></circle>
+                    </svg>
+                </div>
+                <h3>Music Concert</h3>
+                <p>Lively worship and praise music that connects the heart to the Heavens.</p>
+            </div>
+            <div class="highlight-item">
+                <div class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                        <polyline points="17 2 12 7 7 2"></polyline>
+                    </svg>
+                </div>
+                <h3>Skits & Games</h3>
+                <p>Creative expressions of faith and interactive games that build lasting bonds.</p>
+            </div>
+            <div class="highlight-item">
+                <div class="item-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                        <circle cx="9" cy="7" r="4"></circle>
+                        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                    </svg>
+                </div>
+                <h3>Fellowship</h3>
+                <p>Join a community of like-minded teenagers growing together in faith and love.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Schedule Overview -->
+    <section id="schedule" class="dark-bg reveal">
+        <h2 class="center-text">Schedule Overview</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="day">Day 1</div>
+                <div class="event">
+                    <h4>April 13 | 5:00 PM</h4>
+                    <p>Arrival & Opening Session</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="day">Day 2-3</div>
+                <div class="event">
+                    <h4>April 14 - 15</h4>
+                    <p>Spiritual Enrichement, Activities & Fellowship</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="day">Day 4</div>
+                <div class="event">
+                    <h4>April 16 | 4:00 PM</h4>
+                    <p>Concluding Mass & Departure</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Venue Section -->
+    <section id="venue" class="reveal">
+        <h2 class="center-text">Venue</h2>
+        <div class="venue-container">
+            <div class="venue-info">
+                <h3>AKJM School, Kanjirappally</h3>
+                <p>A peaceful and spacious environment conducive to spiritual growth and community building.</p>
+                <a href="https://maps.app.goo.gl/vuPt7KYZVfmAXPbE7" target="_blank" class="btn btn-outline dark">Open in
+                    Maps</a>
+            </div>
+            <div class="map-wrapper">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3580.97467600445!2d76.78418111008509!3d9.555430680488108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b063678d9a41f7b%3A0x8edf5bc5a533f4fd!2sAKJM%20Higher%20Secondary%20School!5e1!3m2!1sen!2sin!4v1769941329001!5m2!1sen!2sin"
+                    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Journey So Far -->
+    <!-- <section id="gallery" class="reveal">
+        <h2 class="center-text">Journey So Far</h2>
+        <p class="center-text sub">Memories from our previous programs</p>
+        <div class="gallery-grid" id="gallery-container">
+            <!-- Gallery images will be inserted here -->
+    <!-- </div>
+    </section> --> -->
+
+    <!-- Registration Section -->
+    <section id="register" class="dark-bg reveal">
+        <div class="registration-container">
+            <h2 class="center-text">Register Now</h2>
+            <p class="center-text gold-text">Limited Seats Available!</p>
+            <div class="form-wrapper">
+                <form
+                    action="https://docs.google.com/forms/d/e/1FAIpQLScA0bsPDocm0PwPZJVWdehvWoaWDpsO4votctEkZPbezeTGPA/formResponse"
+                    method="POST" target="hidden_iframe" id="registration-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name">Full Name*</label>
+                            <input type="text" id="name" name="entry.2091411726" placeholder="Your Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email ID*</label>
+                            <input type="email" id="email" name="entry.1028874845" placeholder="yourname@email.com"
+                                required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mobile">Parent's Number (Whatsapp)*</label>
+                            <input type="tel" id="mobile" name="entry.1828037736" placeholder="10-digit number" required
+                                pattern="[0-9]{10}">
+                        </div>
+                        <div class="form-group">
+                            <label for="alt_mobile">Mobile Number (Alternate)</label>
+                            <input type="tel" id="alt_mobile" name="entry.1730163662" placeholder="10-digit number"
+                                pattern="[0-9]{10}">
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="address">Address*</label>
+                            <textarea id="address" name="entry.2057962909" placeholder="Your full address"
+                                rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gender*</label>
+                            <select id="gender" name="entry.1030283989" required>
+                                <option value="" disabled selected>Select Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="class">Class*</label>
+                            <select id="class" name="entry.146500009" required>
+                                <option value="" disabled selected>Select Class</option>
+                                <option value="8">8</option>
+                                <option value="9">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                                <option value="+2 passout">+2 passout</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="parish">Parish / Church*</label>
+                            <select id="parish_select" name="entry.349600665" required
+                                onchange="toggleOtherParish(this.value)">
+                                <option value="" disabled selected>Select your Parish</option>
+                                <option value="Alampally St. Dominic">Alampally St. Dominic</option>
+                                <option value="Amalagiri St. Thomas">Amalagiri St. Thomas</option>
+                                <option value="Amaravathy St. Joseph">Amaravathy St. Joseph</option>
+                                <option value="Anakkal St. Antony">Anakkal St. Antony</option>
+                                <option value="Anakkara St. Thomas Forane">Anakkara St. Thomas Forane</option>
+                                <option value="Anavilasam St. George">Anavilasam St. George</option>
+                                <option value="Anchilippa Pius X">Anchilippa Pius X</option>
+                                <option value="Angel Valley St. Mary">Angel Valley St. Mary</option>
+                                <option value="Anickad St. Mary">Anickad St. Mary</option>
+                                <option value="Aniyartholu St. Thomas">Aniyartholu St. Thomas</option>
+                                <option value="Arayanjilimannu St. Joseph">Arayanjilimannu St. Joseph</option>
+                                <option value="Azhangadu St. Antony">Azhangadu St. Antony</option>
+                                <option value="Chakkupallam Carmala Matha">Chakkupallam Carmala Matha</option>
+                                <option value="Chamampathal Fathim Matha">Chamampathal Fathim Matha</option>
+                                <option value="Cheenkalthadam St. Joseph">Cheenkalthadam St. Joseph</option>
+                                <option value="Chellarkovil Mar Sleeva">Chellarkovil Mar Sleeva</option>
+                                <option value="Chembalam St. Mary">Chembalam St. Mary</option>
+                                <option value="Chembanoly St. Sebastian">Chembanoly St. Sebastian</option>
+                                <option value="Chemmannu St. Thomas">Chemmannu St. Thomas</option>
+                                <option value="Chengalam St. Antony">Chengalam St. Antony</option>
+                                <option value="Chenkal Sacred Heart">Chenkal Sacred Heart</option>
+                                <option value="Chennakkunnu St. George">Chennakkunnu St. George</option>
+                                <option value="Cheruvallikulam St. George">Cheruvallikulam St. George</option>
+                                <option value="Cheruvally St. Mary">Cheruvally St. Mary</option>
+                                <option value="Chinnar St. George">Chinnar St. George</option>
+                                <option value="Chottupara St. Gianna">Chottupara St. Gianna</option>
+                                <option value="Cumbammettu St. Joseph">Cumbammettu St. Joseph</option>
+                                <option value="Edakkunnam Velankanni Matha">Edakkunnam Velankanni Matha</option>
+                                <option value="Edamon St. Mary">Edamon St. Mary</option>
+                                <option value="Elamgulam St. Mary">Elamgulam St. Mary</option>
+                                <option value="Elangoi Holy Cross">Elangoi Holy Cross</option>
+                                <option value="Elappara St. Alphonsa">Elappara St. Alphonsa</option>
+                                <option value="Elikkulam Infant Jesus">Elikkulam Infant Jesus</option>
+                                <option value="Elivalikkara St. Antony">Elivalikkara St. Antony</option>
+                                <option value="Erumely Assumption Forane">Erumely Assumption Forane</option>
+                                <option value="Eruthvapuzha Infant Jesus">Eruthvapuzha Infant Jesus</option>
+                                <option value="Geenvalley Infant Jesus">Geenvalley Infant Jesus</option>
+                                <option value="Grace Mount Grace Matha">Grace Mount Grace Matha</option>
+                                <option value="Inchiyani Holy Family">Inchiyani Holy Family</option>
+                                <option value="John Paul Nagar St. John Paul II">John Paul Nagar St. John Paul II
+                                </option>
+                                <option value="Kalthotty Holy Family">Kalthotty Holy Family</option>
+                                <option value="Kanamala St.Thomas">Kanamala St.Thomas</option>
+                                <option value="Kanayankavayal St. Mary">Kanayankavayal St. Mary</option>
+                                <option value="Kanchiyar St. Mary">Kanchiyar St. Mary</option>
+                                <option value="Kanjirapally St. Dominic Cathedral">Kanjirapally St. Dominic Cathedral
+                                </option>
+                                <option value="Kannampally St. Mary">Kannampally St. Mary</option>
+                                <option value="Kannimala St. Joseph">Kannimala St. Joseph</option>
+                                <option value="Kappad Holy Cross">Kappad Holy Cross</option>
+                                <option value="Karikattoor St. Antony">Karikattoor St. Antony</option>
+                                <option value="Karikulam Fathima Matha">Karikulam Fathima Matha</option>
+                                <option value="Karunapuram St. Mary">Karunapuram St. Mary</option>
+                                <option value="Kattappana St. George Forane">Kattappana St. George Forane</option>
+                                <option value="Keerikkara St. Antony">Keerikkara St. Antony</option>
+                                <option value="Kizhakkemattukatta St. Thomas">Kizhakkemattukatta St. Thomas</option>
+                                <option value="Kochera St. Joseph">Kochera St. Joseph</option>
+                                <option value="Kochuthovala St. Joseph">Kochuthovala St. Joseph</option>
+                                <option value="Kollamula Maria Goretti">Kollamula Maria Goretti</option>
+                                <option value="Konni St. Jude">Konni St. Jude</option>
+                                <option value="Koothattukulam (Chittar) Assumption">Koothattukulam (Chittar) Assumption
+                                </option>
+                                <option value="Koovapally St. Joseph">Koovapally St. Joseph</option>
+                                <option value="Koratty New St. Joseph">Koratty New St. Joseph</option>
+                                <option value="Koruthodu St. George">Koruthodu St. George</option>
+                                <option value="Kozhancherry Holy Family">Kozhancherry Holy Family</option>
+                                <option value="Kumily-Attapallam St. Thomas Forane">Kumily-Attapallam St. Thomas Forane
+                                </option>
+                                <option value="Kunnumbhagam St. Joseph">Kunnumbhagam St. Joseph</option>
+                                <option value="Kurumpanmoozhy St. Thomas">Kurumpanmoozhy St. Thomas</option>
+                                <option value="Kuzhitholu St. Sebastian">Kuzhitholu St. Sebastian</option>
+                                <option value="Madukka St. Mathew">Madukka St. Mathew</option>
+                                <option value="Mangapara Nithyasahaya Matha">Mangapara Nithyasahaya Matha</option>
+                                <option value="Mangapetta St. Thomas">Mangapetta St. Thomas</option>
+                                <option value="Manipuzha Christ the King">Manipuzha Christ the King</option>
+                                <option value="Mariagiri St. Sebastian">Mariagiri St. Sebastian</option>
+                                <option value="Marykulam St. George">Marykulam St. George</option>
+                                <option value="Meenkuzhy Little Flower">Meenkuzhy Little Flower</option>
+                                <option value="Meloram St. Sebastian">Meloram St. Sebastian</option>
+                                <option value="Meppara Lourde Matha">Meppara Lourde Matha</option>
+                                <option value="Mlamala Fathima Matha">Mlamala Fathima Matha</option>
+                                <option value="Mukkoottuthara St. Thomas">Mukkoottuthara St. Thomas</option>
+                                <option value="Mukkulam St. George">Mukkulam St. George</option>
+                                <option value="Mulankunnu Infant Jesus">Mulankunnu Infant Jesus</option>
+                                <option value="Mundakayam Our Lady of Dolours">Mundakayam Our Lady of Dolours</option>
+                                <option value="Mundakayam St Mary’s Latin Church">Mundakayam St Mary’s Latin Church
+                                </option>
+                                <option value="Mundiyeruma Assumption">Mundiyeruma Assumption</option>
+                                <option value="Murinjapuzha St. George">Murinjapuzha St. George</option>
+                                <option value="Nallathanny Holy Family">Nallathanny Holy Family</option>
+                                <option value="Narianpara Holy Cross">Narianpara Holy Cross</option>
+                                <option value="Nazranipuram St. Mathew">Nazranipuram St. Mathew</option>
+                                <option value="Nettithozhu St. Isidore">Nettithozhu St. Isidore</option>
+                                <option value="Neyyattussery St. George">Neyyattussery St. George</option>
+                                <option value="Nilackal-Thulapally Marthoma Sleeha">Nilackal-Thulapally Marthoma Sleeha
+                                </option>
+                                <option value="Niravu St. Mary">Niravu St. Mary</option>
+                                <option value="Nirmalagiri St. Antony">Nirmalagiri St. Antony</option>
+                                <option value="Nirmalapuram Holy Family">Nirmalapuram Holy Family</option>
+                                <option value="Padanilam St. Sebastian">Padanilam St. Sebastian</option>
+                                <option value="Palampra Gethsemene">Palampra Gethsemene</option>
+                                <option value="Palapra Vimala Matha">Palapra Vimala Matha</option>
+                                <option value="Paloorkavu St. George">Paloorkavu St. George</option>
+                                <option value="Pampadumpara St. George">Pampadumpara St. George</option>
+                                <option value="Panapilavu St. Joseph">Panapilavu St. Joseph</option>
+                                <option value="Pathanamthitta Mary Matha Forane">Pathanamthitta Mary Matha Forane
+                                </option>
+                                <option value="Pazhaya Koratty">Pazhaya Koratty</option>
+                                <option value="Pazhayidom St. Michael">Pazhayidom St. Michael</option>
+                                <option value="Peermade St. Mary">Peermade St. Mary</option>
+                                <option value="Periyar Vallakadavu St. Joseph">Periyar Vallakadavu St. Joseph</option>
+                                <option value="Perunadu St. Jude">Perunadu St. Jude</option>
+                                <option value="Perunthenaruvi St. Joseph">Perunthenaruvi St. Joseph</option>
+                                <option value="Peruvanthanam St. Joseph Forane">Peruvanthanam St. Joseph Forane</option>
+                                <option value="Pezhumpara Sacred Heart">Pezhumpara Sacred Heart</option>
+                                <option value="Plachery Fathima Matha">Plachery Fathima Matha</option>
+                                <option value="Podimattam St. Mary">Podimattam St. Mary</option>
+                                <option value="Podimattam St. Joseph Latin Church">Podimattam St. Joseph Latin Church
+                                </option>
+                                <option value="Ponkunnam Holy Family Forane">Ponkunnam Holy Family Forane</option>
+                                <option value="Poomattam St. Thomas">Poomattam St. Thomas</option>
+                                <option value="Pulianmala St. Antony">Pulianmala St. Antony</option>
+                                <option value="Pulinkatta St. George">Pulinkatta St. George</option>
+                                <option value="Pullanithakidy St. Rita">Pullanithakidy St. Rita</option>
+                                <option value="Pullikkanam St. Thomas">Pullikkanam St. Thomas</option>
+                                <option value="Punchavayal St. Sebastian">Punchavayal St. Sebastian</option>
+                                <option value="Purakkayam St. Joseph">Purakkayam St. Joseph</option>
+                                <option value="Puttady Velankanni Matha">Puttady Velankanni Matha</option>
+                                <option value="Rajagiri Christu Raj">Rajagiri Christu Raj</option>
+                                <option value="Ramakalmettu Sacred Heart">Ramakalmettu Sacred Heart</option>
+                                <option value="Ranni Infanat Jesus Forane">Ranni Infanat Jesus Forane</option>
+                                <option value="Santhigiri St. George">Santhigiri St. George</option>
+                                <option value="Sanyasioda St. Antony">Sanyasioda St. Antony</option>
+                                <option value="Seethathodu St. George">Seethathodu St. George</option>
+                                <option value="Swaraj St. Paul">Swaraj St. Paul</option>
+                                <option value="Thachapuzha St. Mary">Thachapuzha St. Mary</option>
+                                <option value="Thamarakunnu St. Ephrem">Thamarakunnu St. Ephrem</option>
+                                <option value="Thampalakadu St. Thomas">Thampalakadu St. Thomas</option>
+                                <option value="Tharakanattukunnu St. Antony">Tharakanattukunnu St. Antony</option>
+                                <option value="Thekkemala St. Mary">Thekkemala St. Mary</option>
+                                <option value="Third Camp St. Joseph">Third Camp St. Joseph</option>
+                                <option value="Uluppooni St. Alphonsa">Uluppooni St. Alphonsa</option>
+                                <option value="Umikuppa Lourde Matha">Umikuppa Lourde Matha</option>
+                                <option value="Upputhara St. Mary Forane">Upputhara St. Mary Forane</option>
+                                <option value="Vadakkemala St. Sebastian">Vadakkemala St. Sebastian</option>
+                                <option value="Vakayar Infant Jesus">Vakayar Infant Jesus</option>
+                                <option value="Valiyathovala Christ Raj">Valiyathovala Christ Raj</option>
+                                <option value="Vallakadavu St. Antony">Vallakadavu St. Antony</option>
+                                <option value="Vanchimala St. Antony">Vanchimala St. Antony</option>
+                                <option value="Vandanmedu St. Antony">Vandanmedu St. Antony</option>
+                                <option value="Vandanpathal St. Paul">Vandanpathal St. Paul</option>
+                                <option value="Vechoochira St. Joseph">Vechoochira St. Joseph</option>
+                                <option value="Velichiyani St. Thomas Forane">Velichiyani St. Thomas Forane</option>
+                                <option value="Vellaramkunnu St. Mary">Vellaramkunnu St. Mary</option>
+                                <option value="Wallardy Holy Cross">Wallardy Holy Cross</option>
+                                <option value="Yendayar St. Jude">Yendayar St. Jude</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group full-width" id="other-parish-group" style="display:none;">
+                            <label for="other_parish">Please specify your Parish*</label>
+                            <input type="text" id="other_parish" placeholder="Enter your Parish name">
+                        </div>
+                        <div class="form-group">
+                            <label for="school">School*</label>
+                            <input type="text" id="school" name="entry.621038986" placeholder="Name of your School"
+                                required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary large full-width">Submit Registration</button>
+                </form>
+                <div id="form-message"
+                    style="display:none; text-align:center; padding: 20px; color: var(--gold-accent);">
+                    <h3>Thank you for registering!</h3>
+                    <p>We will get in touch with you soon.</p>
+                </div>
+                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+                    onload="if(submitted){handleFormSubmit();}"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Follow-Up -->
+    <section id="followup" class="reveal">
+        <div class="center-text max-800">
+            <h2>Post-Program Follow-up</h2>
+            <div class="divider center"></div>
+            <p>The journey doesn't end on April 16th. Chosen 2026 includes continued fellowship and faith formation
+                sessions to help teenagers sustain their spiritual growth and stay connected with the community.</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="dark-bg">
+        <section class="footer-content">
+            <div class="footer-brand">
+                <img src="assets/Chosen logo- White.png" alt="Chosen Logo" class="footer-logo">
+                <p>Organized by Jesus Youth Teens Ministry</p>
+            </div>
+            <div class="footer-contact">
+                <h3>Contact Us</h3>
+                <p>Email: jyteenskanjirappally@gmail.com</p>
+                <p>Phone: +91 85909 34207(Rony)</p>
+                <p>Phone: +91 97074 43677(Riyan)</p>
+            </div>
+        </section>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Chosen Jesus Youth Teens Ministry. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
