@@ -7,6 +7,23 @@
     <title>Chosen 2026 | Jesus Youth Teens Ministry</title>
     <meta name="description"
         content="An Encounter with Jesus | A Christ-Centered Life. Join us for Chosen 2026 at AKJM School, Kanjirappally. April 13-16, 2026.">
+    <meta name="keywords"
+        content="Chosen 2026, Jesus Youth, Teens Ministry, Christ-Centered Life, AKJM School, Kanjirappally, Catholic Youth Program">
+    <meta name="author" content="Jesus Youth Teens Ministry">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <!-- <meta property="og:url" content="https://chosen2026.com/"> -->
+    <meta property="og:title" content="Chosen 2026 | Jesus Youth Teens Ministry">
+    <meta property="og:description"
+        content="An Encounter with Jesus | A Christ-Centered Life. Join us for Chosen 2026 at AKJM School, Kanjirappally.">
+    <meta property="og:image" content="assets/img1.jpg">
+
+    
+    
+
+    <!-- Theme Color -->
+    <meta name="theme-color" content="#0C0C0C">
 
     <!-- Fonts -->
     <link
@@ -48,7 +65,7 @@
 
         <nav>
             <div class="nav-container">
-                <img src="assets/Chosen logo- White.png" alt="Chosen Logo" class="logo">
+                <img src="assets/Chosen logo- White.png" alt="Chosen Logo" class="logo" >
                 <div class="nav-links">
                     <a href="#about">About</a>
                     <a href="#schedule">Schedule</a>
@@ -99,65 +116,17 @@
         <div class="intercession-container center-text">
             <h2 class="section-title">Community Intercession</h2>
             <div class="divider center"></div>
-
+            <p class="sub-text">Wait Wait Wait... Before Scrolling further down just offer a prayer for our Program</p>
             <div class="grand-total-box">
                 <span class="total-label">Total Intercessions Offered</span>
                 <div class="total-count" id="grand-total-count">...</div>
             </div>
 
-            <p class="sub-text">Join our community in prayer. Every heart, every prayer counts.</p>
-
             <div class="intercession-grid">
-                <!-- Hail Mary -->
-                <div class="intercession-card" data-prayer="Hail Mary">
-                    <div class="card-icon">🌸</div>
-                    <h3>Hail Mary</h3>
-                    <div class="count" id="count-hail-mary">...</div>
-                    <div class="prayer-btns">
-                        <button onclick="submitPrayer('Hail Mary', 1)">+1</button>
-                        <button onclick="submitPrayer('Hail Mary', 2)">+2</button>
-                        <button onclick="submitPrayer('Hail Mary', 5)">+5</button>
-                    </div>
-                </div>
+                <!-- Dynamically populated by script.js -->
+            </div> <!-- closing intercession-grid -->
+        </div> <!-- closing intercession-container -->
 
-                <!-- Our Father -->
-                <div class="intercession-card" data-prayer="Our Father">
-                    <div class="card-icon">🙏</div>
-                    <h3>Our Father</h3>
-                    <div class="count" id="count-our-father">...</div>
-                    <div class="prayer-btns">
-                        <button onclick="submitPrayer('Our Father', 1)">+1</button>
-                        <button onclick="submitPrayer('Our Father', 2)">+2</button>
-                        <button onclick="submitPrayer('Our Father', 5)">+5</button>
-                    </div>
-                </div>
-
-                <!-- Holy Mass -->
-                <div class="intercession-card" data-prayer="Holy Mass">
-                    <div class="card-icon">⛪</div>
-                    <h3>Holy Mass</h3>
-                    <div class="count" id="count-holy-mass">...</div>
-                    <div class="prayer-btns">
-                        <button onclick="submitPrayer('Holy Mass', 1)">+1</button>
-                        <button onclick="submitPrayer('Holy Mass', 2)">+2</button>
-                        <button onclick="submitPrayer('Holy Mass', 5)">+5</button>
-                    </div>
-                </div>
-
-                <!-- Fasting -->
-                <div class="intercession-card" data-prayer="Fasting">
-                    <div class="card-icon">🍞</div>
-                    <h3>Fasting</h3>
-                    <div class="count" id="count-fasting">...</div>
-                    <div class="prayer-btns">
-                        <button onclick="submitPrayer('Fasting', 1)">+1</button>
-                        <button onclick="submitPrayer('Fasting', 2)">+2</button>
-                        <button onclick="submitPrayer('Fasting', 5)">+5</button>
-                    </div>
-                </div>
-            </div>
-            <div id="prayer-toast" class="toast">Thank you for praying</div>
-        </div>
     </section>
 
     <!-- About Section -->
@@ -382,7 +351,6 @@
                                 <option value="" disabled selected>Select Gender</option>
                                 <option value="Male">Male</option>
                                 <option value="Female">Female</option>
-                                <option value="Other">Other</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -400,165 +368,8 @@
                         <div class="form-group">
                             <label for="parish">Parish / Church*</label>
                             <select id="parish_select" name="entry.349600665" required
-                                onchange="toggleOtherParish(this.value)">
-                                <option value="" disabled selected>Select your Parish</option>
-                                <option value="Alampally St. Dominic">Alampally St. Dominic</option>
-                                <option value="Amalagiri St. Thomas">Amalagiri St. Thomas</option>
-                                <option value="Amaravathy St. Joseph">Amaravathy St. Joseph</option>
-                                <option value="Anakkal St. Antony">Anakkal St. Antony</option>
-                                <option value="Anakkara St. Thomas Forane">Anakkara St. Thomas Forane</option>
-                                <option value="Anavilasam St. George">Anavilasam St. George</option>
-                                <option value="Anchilippa Pius X">Anchilippa Pius X</option>
-                                <option value="Angel Valley St. Mary">Angel Valley St. Mary</option>
-                                <option value="Anickad St. Mary">Anickad St. Mary</option>
-                                <option value="Aniyartholu St. Thomas">Aniyartholu St. Thomas</option>
-                                <option value="Arayanjilimannu St. Joseph">Arayanjilimannu St. Joseph</option>
-                                <option value="Azhangadu St. Antony">Azhangadu St. Antony</option>
-                                <option value="Chakkupallam Carmala Matha">Chakkupallam Carmala Matha</option>
-                                <option value="Chamampathal Fathim Matha">Chamampathal Fathim Matha</option>
-                                <option value="Cheenkalthadam St. Joseph">Cheenkalthadam St. Joseph</option>
-                                <option value="Chellarkovil Mar Sleeva">Chellarkovil Mar Sleeva</option>
-                                <option value="Chembalam St. Mary">Chembalam St. Mary</option>
-                                <option value="Chembanoly St. Sebastian">Chembanoly St. Sebastian</option>
-                                <option value="Chemmannu St. Thomas">Chemmannu St. Thomas</option>
-                                <option value="Chengalam St. Antony">Chengalam St. Antony</option>
-                                <option value="Chenkal Sacred Heart">Chenkal Sacred Heart</option>
-                                <option value="Chennakkunnu St. George">Chennakkunnu St. George</option>
-                                <option value="Cheruvallikulam St. George">Cheruvallikulam St. George</option>
-                                <option value="Cheruvally St. Mary">Cheruvally St. Mary</option>
-                                <option value="Chinnar St. George">Chinnar St. George</option>
-                                <option value="Chottupara St. Gianna">Chottupara St. Gianna</option>
-                                <option value="Cumbammettu St. Joseph">Cumbammettu St. Joseph</option>
-                                <option value="Edakkunnam Velankanni Matha">Edakkunnam Velankanni Matha</option>
-                                <option value="Edamon St. Mary">Edamon St. Mary</option>
-                                <option value="Elamgulam St. Mary">Elamgulam St. Mary</option>
-                                <option value="Elangoi Holy Cross">Elangoi Holy Cross</option>
-                                <option value="Elappara St. Alphonsa">Elappara St. Alphonsa</option>
-                                <option value="Elikkulam Infant Jesus">Elikkulam Infant Jesus</option>
-                                <option value="Elivalikkara St. Antony">Elivalikkara St. Antony</option>
-                                <option value="Erumely Assumption Forane">Erumely Assumption Forane</option>
-                                <option value="Eruthvapuzha Infant Jesus">Eruthvapuzha Infant Jesus</option>
-                                <option value="Geenvalley Infant Jesus">Geenvalley Infant Jesus</option>
-                                <option value="Grace Mount Grace Matha">Grace Mount Grace Matha</option>
-                                <option value="Inchiyani Holy Family">Inchiyani Holy Family</option>
-                                <option value="John Paul Nagar St. John Paul II">John Paul Nagar St. John Paul II
-                                </option>
-                                <option value="Kalthotty Holy Family">Kalthotty Holy Family</option>
-                                <option value="Kanamala St.Thomas">Kanamala St.Thomas</option>
-                                <option value="Kanayankavayal St. Mary">Kanayankavayal St. Mary</option>
-                                <option value="Kanchiyar St. Mary">Kanchiyar St. Mary</option>
-                                <option value="Kanjirapally St. Dominic Cathedral">Kanjirapally St. Dominic Cathedral
-                                </option>
-                                <option value="Kannampally St. Mary">Kannampally St. Mary</option>
-                                <option value="Kannimala St. Joseph">Kannimala St. Joseph</option>
-                                <option value="Kappad Holy Cross">Kappad Holy Cross</option>
-                                <option value="Karikattoor St. Antony">Karikattoor St. Antony</option>
-                                <option value="Karikulam Fathima Matha">Karikulam Fathima Matha</option>
-                                <option value="Karunapuram St. Mary">Karunapuram St. Mary</option>
-                                <option value="Kattappana St. George Forane">Kattappana St. George Forane</option>
-                                <option value="Keerikkara St. Antony">Keerikkara St. Antony</option>
-                                <option value="Kizhakkemattukatta St. Thomas">Kizhakkemattukatta St. Thomas</option>
-                                <option value="Kochera St. Joseph">Kochera St. Joseph</option>
-                                <option value="Kochuthovala St. Joseph">Kochuthovala St. Joseph</option>
-                                <option value="Kollamula Maria Goretti">Kollamula Maria Goretti</option>
-                                <option value="Konni St. Jude">Konni St. Jude</option>
-                                <option value="Koothattukulam (Chittar) Assumption">Koothattukulam (Chittar) Assumption
-                                </option>
-                                <option value="Koovapally St. Joseph">Koovapally St. Joseph</option>
-                                <option value="Koratty New St. Joseph">Koratty New St. Joseph</option>
-                                <option value="Koruthodu St. George">Koruthodu St. George</option>
-                                <option value="Kozhancherry Holy Family">Kozhancherry Holy Family</option>
-                                <option value="Kumily-Attapallam St. Thomas Forane">Kumily-Attapallam St. Thomas Forane
-                                </option>
-                                <option value="Kunnumbhagam St. Joseph">Kunnumbhagam St. Joseph</option>
-                                <option value="Kurumpanmoozhy St. Thomas">Kurumpanmoozhy St. Thomas</option>
-                                <option value="Kuzhitholu St. Sebastian">Kuzhitholu St. Sebastian</option>
-                                <option value="Madukka St. Mathew">Madukka St. Mathew</option>
-                                <option value="Mangapara Nithyasahaya Matha">Mangapara Nithyasahaya Matha</option>
-                                <option value="Mangapetta St. Thomas">Mangapetta St. Thomas</option>
-                                <option value="Manipuzha Christ the King">Manipuzha Christ the King</option>
-                                <option value="Mariagiri St. Sebastian">Mariagiri St. Sebastian</option>
-                                <option value="Marykulam St. George">Marykulam St. George</option>
-                                <option value="Meenkuzhy Little Flower">Meenkuzhy Little Flower</option>
-                                <option value="Meloram St. Sebastian">Meloram St. Sebastian</option>
-                                <option value="Meppara Lourde Matha">Meppara Lourde Matha</option>
-                                <option value="Mlamala Fathima Matha">Mlamala Fathima Matha</option>
-                                <option value="Mukkoottuthara St. Thomas">Mukkoottuthara St. Thomas</option>
-                                <option value="Mukkulam St. George">Mukkulam St. George</option>
-                                <option value="Mulankunnu Infant Jesus">Mulankunnu Infant Jesus</option>
-                                <option value="Mundakayam Our Lady of Dolours">Mundakayam Our Lady of Dolours</option>
-                                <option value="Mundakayam St Mary’s Latin Church">Mundakayam St Mary’s Latin Church
-                                </option>
-                                <option value="Mundiyeruma Assumption">Mundiyeruma Assumption</option>
-                                <option value="Murinjapuzha St. George">Murinjapuzha St. George</option>
-                                <option value="Nallathanny Holy Family">Nallathanny Holy Family</option>
-                                <option value="Narianpara Holy Cross">Narianpara Holy Cross</option>
-                                <option value="Nazranipuram St. Mathew">Nazranipuram St. Mathew</option>
-                                <option value="Nettithozhu St. Isidore">Nettithozhu St. Isidore</option>
-                                <option value="Neyyattussery St. George">Neyyattussery St. George</option>
-                                <option value="Nilackal-Thulapally Marthoma Sleeha">Nilackal-Thulapally Marthoma Sleeha
-                                </option>
-                                <option value="Niravu St. Mary">Niravu St. Mary</option>
-                                <option value="Nirmalagiri St. Antony">Nirmalagiri St. Antony</option>
-                                <option value="Nirmalapuram Holy Family">Nirmalapuram Holy Family</option>
-                                <option value="Padanilam St. Sebastian">Padanilam St. Sebastian</option>
-                                <option value="Palampra Gethsemene">Palampra Gethsemene</option>
-                                <option value="Palapra Vimala Matha">Palapra Vimala Matha</option>
-                                <option value="Paloorkavu St. George">Paloorkavu St. George</option>
-                                <option value="Pampadumpara St. George">Pampadumpara St. George</option>
-                                <option value="Panapilavu St. Joseph">Panapilavu St. Joseph</option>
-                                <option value="Pathanamthitta Mary Matha Forane">Pathanamthitta Mary Matha Forane
-                                </option>
-                                <option value="Pazhaya Koratty">Pazhaya Koratty</option>
-                                <option value="Pazhayidom St. Michael">Pazhayidom St. Michael</option>
-                                <option value="Peermade St. Mary">Peermade St. Mary</option>
-                                <option value="Periyar Vallakadavu St. Joseph">Periyar Vallakadavu St. Joseph</option>
-                                <option value="Perunadu St. Jude">Perunadu St. Jude</option>
-                                <option value="Perunthenaruvi St. Joseph">Perunthenaruvi St. Joseph</option>
-                                <option value="Peruvanthanam St. Joseph Forane">Peruvanthanam St. Joseph Forane</option>
-                                <option value="Pezhumpara Sacred Heart">Pezhumpara Sacred Heart</option>
-                                <option value="Plachery Fathima Matha">Plachery Fathima Matha</option>
-                                <option value="Podimattam St. Mary">Podimattam St. Mary</option>
-                                <option value="Podimattam St. Joseph Latin Church">Podimattam St. Joseph Latin Church
-                                </option>
-                                <option value="Ponkunnam Holy Family Forane">Ponkunnam Holy Family Forane</option>
-                                <option value="Poomattam St. Thomas">Poomattam St. Thomas</option>
-                                <option value="Pulianmala St. Antony">Pulianmala St. Antony</option>
-                                <option value="Pulinkatta St. George">Pulinkatta St. George</option>
-                                <option value="Pullanithakidy St. Rita">Pullanithakidy St. Rita</option>
-                                <option value="Pullikkanam St. Thomas">Pullikkanam St. Thomas</option>
-                                <option value="Punchavayal St. Sebastian">Punchavayal St. Sebastian</option>
-                                <option value="Purakkayam St. Joseph">Purakkayam St. Joseph</option>
-                                <option value="Puttady Velankanni Matha">Puttady Velankanni Matha</option>
-                                <option value="Rajagiri Christu Raj">Rajagiri Christu Raj</option>
-                                <option value="Ramakalmettu Sacred Heart">Ramakalmettu Sacred Heart</option>
-                                <option value="Ranni Infanat Jesus Forane">Ranni Infanat Jesus Forane</option>
-                                <option value="Santhigiri St. George">Santhigiri St. George</option>
-                                <option value="Sanyasioda St. Antony">Sanyasioda St. Antony</option>
-                                <option value="Seethathodu St. George">Seethathodu St. George</option>
-                                <option value="Swaraj St. Paul">Swaraj St. Paul</option>
-                                <option value="Thachapuzha St. Mary">Thachapuzha St. Mary</option>
-                                <option value="Thamarakunnu St. Ephrem">Thamarakunnu St. Ephrem</option>
-                                <option value="Thampalakadu St. Thomas">Thampalakadu St. Thomas</option>
-                                <option value="Tharakanattukunnu St. Antony">Tharakanattukunnu St. Antony</option>
-                                <option value="Thekkemala St. Mary">Thekkemala St. Mary</option>
-                                <option value="Third Camp St. Joseph">Third Camp St. Joseph</option>
-                                <option value="Uluppooni St. Alphonsa">Uluppooni St. Alphonsa</option>
-                                <option value="Umikuppa Lourde Matha">Umikuppa Lourde Matha</option>
-                                <option value="Upputhara St. Mary Forane">Upputhara St. Mary Forane</option>
-                                <option value="Vadakkemala St. Sebastian">Vadakkemala St. Sebastian</option>
-                                <option value="Vakayar Infant Jesus">Vakayar Infant Jesus</option>
-                                <option value="Valiyathovala Christ Raj">Valiyathovala Christ Raj</option>
-                                <option value="Vallakadavu St. Antony">Vallakadavu St. Antony</option>
-                                <option value="Vanchimala St. Antony">Vanchimala St. Antony</option>
-                                <option value="Vandanmedu St. Antony">Vandanmedu St. Antony</option>
-                                <option value="Vandanpathal St. Paul">Vandanpathal St. Paul</option>
-                                <option value="Vechoochira St. Joseph">Vechoochira St. Joseph</option>
-                                <option value="Velichiyani St. Thomas Forane">Velichiyani St. Thomas Forane</option>
-                                <option value="Vellaramkunnu St. Mary">Vellaramkunnu St. Mary</option>
-                                <option value="Wallardy Holy Cross">Wallardy Holy Cross</option>
-                                <option value="Yendayar St. Jude">Yendayar St. Jude</option>
-                                <option value="other">Other</option>
+                                onchange="toggleOtherParish(this.value)" aria-label="Select your Parish">
+                                <!-- Dynamically populated by script.js -->
                             </select>
                         </div>
                         <div class="form-group full-width" id="other-parish-group" style="display:none;">
@@ -569,6 +380,41 @@
                             <label for="school">School*</label>
                             <input type="text" id="school" name="entry.621038986" placeholder="Name of your School"
                                 required>
+                        </div>
+                        <div class="form-group full-width payment-info-section">
+                            <div class="payment-instructions">
+                                <h3>Payment Information</h3>
+                                <p class="payment-advance-note">₹500 is collected as an advance. Please pay the amount
+                                    and upload the screenshot below.</p>
+
+                                <div class="payment-flex-container">
+                                    <div class="qr-code-wrapper">
+                                        <img src="assets/QR.jpeg" alt="Scan to pay ₹500" class="payment-qr"
+                                            loading="lazy" decoding="async">
+                                        <p class="qr-label">Scan to Pay</p>
+                                    </div>
+
+                                    <div class="bank-details">
+                                        <h4>Bank Details</h4>
+                                        <p><strong>Name:</strong> <span>Sreyas Amal Raj</span></p>
+                                        <p><strong>Phone:</strong> <span>9074568307</span></p>
+                                        <p><strong>Account:</strong> <span>196601000009158</span></p>
+                                        <p><strong>IFSC:</strong> <span>IOB0001966</span></p>
+                                        <p><strong>Branch:</strong> <span>Anakkal</span></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label for="payment_screenshot">Upload Payment Screenshot*</label>
+                            <div class="file-upload-wrapper">
+                                <input type="file" id="payment_screenshot" accept="image/*" required
+                                    onchange="handleFileSelect(this)">
+                                <div class="file-upload-preview" id="file-preview">
+                                    <span class="preview-text">No image selected</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary large full-width">Submit Registration</button>

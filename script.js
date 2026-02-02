@@ -1,331 +1,433 @@
-// Preloader and Animation Initialization
-let slideTimer;
+/**
+ * script.js - Optimized version
+ * Consolidates DOM access, uses modern observers for better performance, 
+ * and standardizes API submission logic.
+ */
 
-window.addEventListener("load", () => {
-  const preloader = document.getElementById("preloader");
-  if (preloader) {
-    setTimeout(() => {
-      preloader.classList.add("fade-out");
+// --- Constants & Configuration ---
+const CONFIG = {
+  slideInterval: 5000,
+  prayerRefreshInterval: 8000,
+  formStorageKey: 'chosen_2026_reg_form',
+  gasUploadUrl: "https://script.google.com/macros/s/AKfycbwelH6EmxgOE5W4ds0lnLhNJPjSwkbBULzBU66BRc5cs_oWo2A9E5UAO1XsPcdZq59C/exec",
+  regFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLScA0bsPDocm0PwPZJVWdehvWoaWDpsO4votctEkZPbezeTGPA/formResponse",
+  intercessionFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc4gO2CAUQszRyTXvz_Abguu0x4RK6_YePiLlBd6XZRUScyQw/formResponse",
+  intercessionSheetUrl: "https://docs.google.com/spreadsheets/d/1eV5MnL10zexogVszd8qJH-OODmB0Atelw-Lok_X1yBs/gviz/tq?tqx=out:json&gid=1891816628",
+  fields: {
+    paymentLink: "entry.1783117236",
+    prayerType: "entry.941995307",
+    prayerCount: "entry.1423921248",
+    parish: "entry.349600665"
+  },
+  intercessions: [
+    { type: "Hail Mary", icon: "🌸", description: "Your effort matters." },
+    { type: "Our Father", icon: "🙏", description: "Your effort matters." },
+    { type: "Memorare", icon: "📜", description: "Your effort matters." },
+    { type: "Creed", icon: "✝️", description: "Your effort matters." },
+    { type: "Rosary", icon: "📿", description: "Your effort matters." },
+    { type: "Mercy Rosary", icon: "🥀", description: "Your effort matters." },
+    { type: "Holy Mass", icon: "⛪", description: "Your effort matters." },
+    { type: "Fasting", icon: "🍞", description: "Your effort matters." }
+  ],
+  parishes: [
+    "Alampally St. Dominic", "Amalagiri St. Thomas", "Amaravathy St. Joseph", "Anakkal St. Antony",
+    "Anakkara St. Thomas Forane", "Anavilasam St. George", "Anchilippa Pius X", "Angel Valley St. Mary",
+    "Anickad St. Mary", "Aniyartholu St. Thomas", "Arayanjilimannu St. Joseph", "Azhangadu St. Antony",
+    "Chakkupallam Carmala Matha", "Chamampathal Fathim Matha", "Cheenkalthadam St. Joseph",
+    "Chellarkovil Mar Sleeva", "Chembalam St. Mary", "Chembanoly St. Sebastian", "Chemmannu St. Thomas",
+    "Chengalam St. Antony", "Chenkal Sacred Heart", "Chennakkunnu St. George", "Cheruvallikulam St. George",
+    "Cheruvally St. Mary", "Chinnar St. George", "Chottupara St. Gianna", "Cumbammettu St. Joseph",
+    "Edakkunnam Velankanni Matha", "Edamon St. Mary", "Elamgulam St. Mary", "Elangoi Holy Cross",
+    "Elappara St. Alphonsa", "Elikkulam Infant Jesus", "Elivalikkara St. Antony", "Erumely Assumption Forane",
+    "Eruthvapuzha Infant Jesus", "Geenvalley Infant Jesus", "Grace Mount Grace Matha", "Inchiyani Holy Family",
+    "John Paul Nagar St. John Paul II", "Kalthotty Holy Family", "Kanamala St.Thomas", "Kanayankavayal St. Mary",
+    "Kanchiyar St. Mary", "Kanjirapally St. Dominic Cathedral", "Kannampally St. Mary", "Kannimala St. Joseph",
+    "Kappad Holy Cross", "Karikattoor St. Antony", "Karikulam Fathima Matha", "Karunapuram St. Mary",
+    "Kattappana St. George Forane", "Keerikkara St. Antony", "Kizhakkemattukatta St. Thomas",
+    "Kochera St. Joseph", "Kochuthovala St. Joseph", "Kollamula Maria Goretti", "Konni St. Jude",
+    "Koothattukulam (Chittar) Assumption", "Koovapally St. Joseph", "Koratty New St. Joseph",
+    "Koruthodu St. George", "Kozhancherry Holy Family", "Kumily-Attapallam St. Thomas Forane",
+    "Kunnumbhagam St. Joseph", "Kurumpanmoozhy St. Thomas", "Kuzhitholu St. Sebastian", "Madukka St. Mathew",
+    "Mangapara Nithyasahaya Matha", "Mangapetta St. Thomas", "Manipuzha Christ the King",
+    "Mariagiri St. Sebastian", "Marykulam St. George", "Meenkuzhy Little Flower", "Meloram St. Sebastian",
+    "Meppara Lourde Matha", "Mlamala Fathima Matha", "Mukkoottuthara St. Thomas", "Mukkulam St. George",
+    "Mulankunnu Infant Jesus", "Mundakayam Our Lady of Dolours", "Mundakayam St Mary’s Latin Church",
+    "Mundiyeruma Assumption", "Murinjapuzha St. George", "Nallathanny Holy Family", "Narianpara Holy Cross",
+    "Nazranipuram St. Mathew", "Nettithozhu St. Isidore", "Neyyattussery St. George",
+    "Nilackal-Thulapally Marthoma Sleeha", "Niravu St. Mary", "Nirmalagiri St. Antony",
+    "Nirmalapuram Holy Family", "Padanilam St. Sebastian", "Palampra Gethsemene", "Palapra Vimala Matha",
+    "Paloorkavu St. George", "Pampadumpara St. George", "Panapilavu St. Joseph",
+    "Pathanamthitta Mary Matha Forane", "Pazhaya Koratty", "Pazhayidom St. Michael", "Peermade St. Mary",
+    "Periyar Vallakadavu St. Joseph", "Perunadu St. Jude", "Perunthenaruvi St. Joseph",
+    "Peruvanthanam St. Joseph Forane", "Pezhumpara Sacred Heart", "Plachery Fathima Matha",
+    "Podimattam St. Mary", "Podimattam St. Joseph Latin Church", "Ponkunnam Holy Family Forane",
+    "Poomattam St. Thomas", "Pulianmala St. Antony", "Pulinkatta St. George", "Pullanithakidy St. Rita",
+    "Pullikkanam St. Thomas", "Punchavayal St. Sebastian", "Purakkayam St. Joseph", "Puttady Velankanni Matha",
+    "Rajagiri Christu Raj", "Ramakalmettu Sacred Heart", "Ranni Infanat Jesus Forane", "Santhigiri St. George",
+    "Sanyasioda St. Antony", "Seethathodu St. George", "Swaraj St. Paul", "Thachapuzha St. Mary",
+    "Thamarakunnu St. Ephrem", "Thampalakadu St. Thomas", "Tharakanattukunnu St. Antony",
+    "Thekkemala St. Mary", "Third Camp St. Joseph", "Uluppooni St. Alphonsa", "Umikuppa Lourde Matha",
+    "Upputhara St. Mary Forane", "Thachapuzha St. Mary", "Vadakkemala St. Sebastian", "Vakayar Infant Jesus",
+    "Valiyathovala Christ Raj", "Vallakadavu St. Antony", "Vanchimala St. Antony", "Vandanmedu St. Antony",
+    "Vandanpathal St. Paul", "Vechoochira St. Joseph", "Velichiyani St. Thomas Forane",
+    "Vellaramkunnu St. Mary", "Wallardy Holy Cross", "Yendayar St. Jude"
+  ]
+};
 
-      // Wait for the CSS transition (1s) to finish before starting page logic
-      setTimeout(() => {
-        startPageAnimations();
-      }, 1000);
-    }, 3000); // 3-second display time
-  } else {
-    startPageAnimations();
+// --- State Management ---
+let state = {
+  currentSlide: 0,
+  slideTimer: null,
+  isSubmitted: false,
+  localPrayers: {
+    "Hail Mary": 0, "Our Father": 0, "Memorare": 0, "Creed": 0,
+    "Rosary": 0, "Mercy Rosary": 0, "Holy Mass": 0, "Fasting": 0
   }
+};
+
+// --- DOM Elements Cache ---
+const elements = {
+  preloader: document.getElementById('preloader'),
+  slides: document.querySelectorAll('.carousel-slide'),
+  dots: document.querySelectorAll('.dot'),
+  regForm: document.getElementById('registration-form'),
+  formMessage: document.getElementById('form-message'),
+  fileInput: document.getElementById('payment_screenshot'),
+  filePreview: document.getElementById('file-preview'),
+  intercessionGrid: document.querySelector('.intercession-grid'),
+  parishSelect: document.getElementById('parish_select')
+};
+
+// --- Initialization ---
+document.addEventListener('DOMContentLoaded', () => {
+  renderDynamicContent();
+  initPreloader();
+  initForm();
+  initIntercessions();
+  initSmoothScroll();
 });
 
-function startPageAnimations() {
-  // 1. Trigger initial scroll reveals
-  reveal();
-  window.addEventListener("scroll", reveal);
-
-  // 2. Start Hero Carousel
-  if (slides.length > 0) {
-    slideTimer = setInterval(nextSlide, slideInterval);
+const renderDynamicContent = () => {
+  // 1. Render Intercessions
+  if (elements.intercessionGrid) {
+    elements.intercessionGrid.innerHTML = CONFIG.intercessions.map(p => `
+      <div class="intercession-card" data-prayer="${p.type}" id="card-${p.type.toLowerCase().replace(/\s+/g, '-')}">
+        <div class="card-main">
+          <div class="card-icon">${p.icon}</div>
+          <h3>${p.type}</h3>
+          <div class="count" id="count-${p.type.toLowerCase().replace(/\s+/g, '-')}">...</div>
+          <p class="count-label">Global Total</p>
+          <div class="user-controls">
+            <div class="stepper">
+              <button onclick="changeLocalCount('${p.type}', -1)">−</button>
+              <span id="local-${p.type.toLowerCase().replace(/\s+/g, '-')}">0</span>
+              <button onclick="changeLocalCount('${p.type}', 1)">+</button>
+            </div>
+            <button class="offer-btn" onclick="submitLocalPrayers('${p.type}')">Offer Prayers</button>
+          </div>
+        </div>
+        <div class="card-thanks">
+          <div class="thanks-content">
+            <span>✨</span>
+            <h4>Thank you for the prayers!</h4>
+            <p>${p.description}</p>
+            <button class="reset-btn" onclick="resetCard('${p.type}')">Pray More</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
   }
-}
 
-// Hero Carousel Logic
-const slides = document.querySelectorAll(".carousel-slide");
-const dots = document.querySelectorAll(".dot");
-let currentSlide = 0;
-const slideInterval = 5000; // 5 seconds
+  // 2. Render Parishes
+  if (elements.parishSelect) {
+    const sortedParishes = [...CONFIG.parishes].sort();
+    const currentVal = elements.parishSelect.value;
+    elements.parishSelect.innerHTML = `
+      <option value="" disabled selected>Select your Parish</option>
+      ${sortedParishes.map(p => `<option value="${p}">${p}</option>`).join('')}
+      <option value="other">Other</option>
+    `;
+    if (currentVal) elements.parishSelect.value = currentVal;
+  }
+};
 
-function showSlide(index) {
-  if (!slides[index]) return;
-  slides.forEach(slide => slide.classList.remove("active"));
-  dots.forEach(dot => dot.classList.remove("active"));
-
-  slides[index].classList.add("active");
-  dots[index].classList.add("active");
-  currentSlide = index;
-}
-
-function nextSlide() {
-  let next = (currentSlide + 1) % slides.length;
-  showSlide(next);
-}
-
-// Click on dots
-dots.forEach((dot, index) => {
-  dot.addEventListener("click", () => {
-    if (slideTimer) clearInterval(slideTimer);
-    showSlide(index);
-    slideTimer = setInterval(nextSlide, slideInterval);
-  });
-});
-
-// Reveal Animations on Scroll
-function reveal() {
-  const reveals = document.querySelectorAll(".reveal");
-
-  reveals.forEach(element => {
-    const windowHeight = window.innerHeight;
-    const elementTop = element.getBoundingClientRect().top;
-    const elementVisible = 150;
-
-    if (elementTop < windowHeight - elementVisible) {
-      element.classList.add("active");
+// --- Preloader & Animations ---
+const initPreloader = () => {
+  const hidePreloader = () => {
+    if (elements.preloader && !elements.preloader.classList.contains('fade-out')) {
+      elements.preloader.classList.add('fade-out');
+      setTimeout(startAnimations, 1000);
     }
-  });
-}
-
-// Remove the old global event listeners and initial calls
-// (They are now moved into startPageAnimations)
-
-// Gallery Configuration
-const galleryImages = [
-  "assets/106A5232.JPG",
-  "assets/IMG_5001.JPG",
-  "assets/IMG_6067.JPG",
-  "assets/IMG_6602.JPG",
-  "assets/IMG_7461.JPG",
-  "assets/IMG_8768.JPG",
-  "assets/Picsart_25-05-24_15-23-56-096.jpg",
-  "assets/img1.jpg",
-  "assets/img2.jpg",
-  "assets/img3.jpg",
-  "assets/img4.JPG",
-  "assets/img5.JPG"
-];
-
-const galleryContainer = document.getElementById("gallery-container");
-
-if (galleryContainer) {
-  galleryImages.forEach(src => {
-    const div = document.createElement("div");
-    div.className = "gallery-item reveal";
-    div.innerHTML = `<img src="${src}" alt="Chosen Gallery Image" loading="lazy">`;
-    galleryContainer.appendChild(div);
-  });
-}
-
-// Smooth Scrolling for Navigation Links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-  anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    const target = document.querySelector(this.getAttribute('href'));
-    if (target) {
-      target.scrollIntoView({
-        behavior: 'smooth'
-      });
-    }
-  });
-});
-// Google Form Submission Handling
-let submitted = false;
-
-function handleFormSubmit() {
-  const form = document.getElementById('registration-form');
-  const message = document.getElementById('form-message');
-
-  if (form && message) {
-    form.style.display = 'none';
-    message.style.display = 'block';
-    message.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }
-}
-
-// Registration Form Persistence & Submission Logic
-const regForm = document.getElementById('registration-form');
-const formStorageKey = 'chosen_2026_reg_form';
-
-// 1. Load data from localStorage on startup
-function loadFormData() {
-  const savedData = localStorage.getItem(formStorageKey);
-  if (!savedData || !regForm) return;
-
-  try {
-    const data = JSON.parse(savedData);
-    Object.keys(data).forEach(key => {
-      const field = regForm.querySelector(`[name="${key}"]`) || document.getElementById(key);
-      if (field) {
-        if (field.type === 'checkbox' || field.type === 'radio') {
-          field.checked = data[key];
-        } else {
-          field.value = data[key];
-        }
-
-        // Handle special cases like the Parish dropdown
-        if (key === 'entry.349600665' || key === 'parish_select') {
-          const val = data[key];
-          // We need to check if the value is 'other' to trigger the toggle
-          if (val === 'other' || regForm.querySelector('#other_parish')?.value) {
-            // If the element with id 'parish_select' has 'other', toggleOtherParish is called
-            const select = document.getElementById('parish_select');
-            if (select && select.value === 'other') toggleOtherParish('other');
-          }
-        }
-      }
-    });
-  } catch (e) {
-    console.error("Error loading form data", e);
-  }
-}
-
-// 2. Save data to localStorage on change
-function saveFormData() {
-  if (!regForm) return;
-  const formData = new FormData(regForm);
-  const data = {};
-
-  // Also capture IDs for elements that might have their names swapped (like Parish)
-  const inputs = regForm.querySelectorAll('input, select, textarea');
-  inputs.forEach(input => {
-    const key = input.name || input.id;
-    if (!key) return;
-
-    if (input.type === 'checkbox' || input.type === 'radio') {
-      data[key] = input.checked;
-    } else {
-      data[key] = input.value;
-    }
-  });
-
-  localStorage.setItem(formStorageKey, JSON.stringify(data));
-}
-
-// 3. Setup Listeners
-if (regForm) {
-  // Load existing data
-  loadFormData();
-
-  // Listen for inputs
-  regForm.addEventListener('input', saveFormData);
-
-  // Handle Submission
-  regForm.addEventListener('submit', () => {
-    submitted = true;
-    localStorage.removeItem(formStorageKey); // Clear storage on submit
-  });
-}
-
-// Parish Toggle Logic
-function toggleOtherParish(value) {
-  const otherGroup = document.getElementById('other-parish-group');
-  const otherInput = document.getElementById('other_parish');
-  const parishSelect = document.getElementById('parish_select');
-
-  if (value === 'other') {
-    otherGroup.style.display = 'block';
-    otherInput.required = true;
-    // Swap name attribute to the text input so it's submitted instead of the select
-    parishSelect.removeAttribute('name');
-    otherInput.setAttribute('name', 'entry.349600665');
-  } else {
-    otherGroup.style.display = 'none';
-    otherInput.required = false;
-    // Restore name attribute to the select
-    parishSelect.setAttribute('name', 'entry.349600665');
-    otherInput.removeAttribute('name');
-  }
-  // Save state after toggle
-  saveFormData();
-}
-
-// Community Intercession Logic
-const INTERCESSION_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSc4gO2CAUQszRyTXvz_Abguu0x4RK6_YePiLlBd6XZRUScyQw/formResponse";
-const INTERCESSION_SHEET_URL = "https://docs.google.com/spreadsheets/d/1eV5MnL10zexogVszd8qJH-OODmB0Atelw-Lok_X1yBs/gviz/tq?tqx=out:json&gid=1891816628";
-const PRAYER_TYPE_FIELD = "entry.941995307";
-const PRAYER_COUNT_FIELD = "entry.1423921248";
-
-async function fetchPrayerTotals() {
-  try {
-    const response = await fetch(INTERCESSION_SHEET_URL);
-    const text = await response.text();
-    // Google Visualization API returns a JSON wrapped in a function call
-    const json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
-
-    const rows = json.table.rows;
-    const totals = {};
-    let grandTotal = 0;
-
-    rows.forEach(row => {
-      const type = row.c[0] ? row.c[0].v : null;
-      const count = row.c[1] ? (parseInt(row.c[1].v) || 0) : 0;
-      if (type) {
-        totals[type] = count;
-        grandTotal += count;
-      }
-    });
-
-    updateCountDisplay(totals, grandTotal);
-  } catch (error) {
-    console.error("Error fetching prayer totals:", error);
-  }
-}
-
-function updateCountDisplay(totals, grandTotal) {
-  const mappings = {
-    "Hail Mary": "count-hail-mary",
-    "Our Father": "count-our-father",
-    "Holy Mass": "count-holy-mass",
-    "Fasting": "count-fasting"
   };
 
-  // Update Grand Total
-  const grandTotalEl = document.getElementById("grand-total-count");
-  if (grandTotalEl) {
-    grandTotalEl.innerText = grandTotal.toLocaleString();
-  }
+  window.addEventListener('load', () => setTimeout(hidePreloader, 1500));
+  setTimeout(hidePreloader, 6000); // Safety fallback
+};
 
-  for (const [type, id] of Object.entries(mappings)) {
-    const element = document.getElementById(id);
-    if (element) {
-      const newCount = totals[type] || 0;
-      // Simple animation if count changes
-      if (element.innerText !== "..." && element.innerText !== newCount.toString()) {
-        element.style.transform = "scale(1.2)";
-        element.style.color = "var(--gold-accent)";
-        setTimeout(() => {
-          element.style.transform = "scale(1)";
-          element.style.color = "var(--deep-red)";
-        }, 300);
+const startAnimations = () => {
+  initScrollReveal();
+  initCarousel();
+};
+
+const initScrollReveal = () => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
       }
-      element.innerText = newCount.toLocaleString();
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+};
+
+// --- Hero Carousel ---
+const initCarousel = () => {
+  if (!elements.slides.length) return;
+
+  const showSlide = (index) => {
+    elements.slides.forEach(s => s.classList.remove('active'));
+    elements.dots.forEach(d => d.classList.remove('active'));
+
+    elements.slides[index].classList.add('active');
+    elements.dots[index].classList.add('active');
+    state.currentSlide = index;
+  };
+
+  const nextSlide = () => showSlide((state.currentSlide + 1) % elements.slides.length);
+
+  state.slideTimer = setInterval(nextSlide, CONFIG.slideInterval);
+
+  elements.dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => {
+      clearInterval(state.slideTimer);
+      showSlide(i);
+      state.slideTimer = setInterval(nextSlide, CONFIG.slideInterval);
+    });
+  });
+};
+
+// --- Registration Form ---
+const initForm = () => {
+  if (!elements.regForm) return;
+
+  loadFormData();
+  elements.regForm.addEventListener('input', saveFormData);
+
+  elements.regForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = elements.regForm.querySelector('button[type="submit"]');
+    const originalText = btn.innerText;
+
+    try {
+      const file = elements.fileInput.files[0];
+      if (!file) throw new Error("Please upload a payment screenshot.");
+
+      btn.disabled = true;
+      btn.innerText = "Processing Payment...";
+
+      // 1. Upload to Drive
+      const uploadResp = await uploadFileToGAS(file);
+      if (!uploadResp.success) throw new Error(uploadResp.error || "Upload failed");
+
+      // 2. Submit Form
+      btn.innerText = "Finalizing Registration...";
+      const formData = new FormData(elements.regForm);
+      formData.append(CONFIG.fields.paymentLink, uploadResp.link);
+
+      await fetch(CONFIG.regFormUrl, { method: 'POST', body: formData, mode: 'no-cors' });
+
+      // 3. Success UI
+      handleFormSuccess();
+      localStorage.removeItem(CONFIG.formStorageKey);
+    } catch (err) {
+      alert(err.message);
+      btn.disabled = false;
+      btn.innerText = originalText;
     }
+  });
+};
+
+const handleFormSuccess = () => {
+  elements.regForm.style.display = 'none';
+  elements.formMessage.style.display = 'block';
+  elements.formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+};
+
+const handleFileSelect = (input) => {
+  const file = input.files[0];
+  if (file && elements.filePreview) {
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      elements.filePreview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-height: 300px; border-radius: 8px;">`;
+    };
+    reader.readAsDataURL(file);
   }
-}
+};
 
-async function submitPrayer(type, count) {
-  // 1. Disable buttons briefly
-  const card = document.querySelector(`.intercession-card[data-prayer="${type}"]`);
-  const buttons = card.querySelectorAll("button");
-  buttons.forEach(btn => btn.disabled = true);
+const uploadFileToGAS = async (file) => {
+  const base64 = await toBase64(file);
+  const params = new URLSearchParams({
+    file: base64.split(',')[1],
+    filename: file.name,
+    type: file.type
+  });
 
-  // 2. Show Toast
-  const toast = document.getElementById("prayer-toast");
-  toast.classList.add("show");
-  setTimeout(() => toast.classList.remove("show"), 3000);
+  const resp = await fetch(CONFIG.gasUploadUrl, { method: 'POST', body: params });
+  return await resp.json();
+};
 
-  // 3. Submit to Google Form
-  const formData = new FormData();
-  formData.append(PRAYER_TYPE_FIELD, type);
-  formData.append(PRAYER_COUNT_FIELD, count);
+const toBase64 = (file) => new Promise((res, rej) => {
+  const reader = new FileReader();
+  reader.readAsDataURL(file);
+  reader.onload = () => res(reader.result);
+  reader.onerror = rej;
+});
+
+// --- Local Storage Persistence ---
+const saveFormData = () => {
+  const data = {};
+  new FormData(elements.regForm).forEach((val, key) => data[key] = val);
+  localStorage.setItem(CONFIG.formStorageKey, JSON.stringify(data));
+};
+
+const loadFormData = () => {
+  const saved = localStorage.getItem(CONFIG.formStorageKey);
+  if (!saved) return;
+  const data = JSON.parse(saved);
+  Object.keys(data).forEach(key => {
+    const field = elements.regForm.querySelector(`[name="${key}"]`);
+    if (field) field.value = data[key];
+  });
+  // Check parish state
+  const parishSelect = document.getElementById('parish_select');
+  if (parishSelect?.value === 'other') toggleOtherParish('other');
+};
+
+// --- Parish Toggle ---
+const toggleOtherParish = (val) => {
+  const group = document.getElementById('other-parish-group');
+  const input = document.getElementById('other_parish');
+  const select = document.getElementById('parish_select');
+
+  const isOther = val === 'other';
+  group.style.display = isOther ? 'block' : 'none';
+  input.required = isOther;
+
+  if (isOther) {
+    select.removeAttribute('name');
+    input.setAttribute('name', CONFIG.fields.parish);
+  } else {
+    select.setAttribute('name', CONFIG.fields.parish);
+    input.removeAttribute('name');
+  }
+  saveFormData();
+};
+
+// --- Community Intercessions ---
+const initIntercessions = () => {
+  fetchPrayerTotals();
+  setInterval(fetchPrayerTotals, CONFIG.prayerRefreshInterval);
+};
+
+const fetchPrayerTotals = async () => {
+  try {
+    const resp = await fetch(CONFIG.intercessionSheetUrl);
+    const text = await resp.text();
+    const json = JSON.parse(text.substring(text.indexOf("{"), text.lastIndexOf("}") + 1));
+
+    let grandTotal = 0;
+    const totals = json.table.rows.reduce((acc, row) => {
+      const type = row.c[0]?.v;
+      const val = parseInt(row.c[1]?.v) || 0;
+      if (type) { acc[type] = val; grandTotal += val; }
+      return acc;
+    }, {});
+
+    updateIntercessionUI(totals, grandTotal);
+  } catch (e) {
+    console.error("Fetch totals error", e);
+  }
+};
+
+const updateIntercessionUI = (totals, grand) => {
+  const grandEl = document.getElementById('grand-total-count');
+  if (grandEl) grandEl.innerText = grand.toLocaleString();
+
+  CONFIG.intercessions.forEach(p => {
+    const id = `count-${p.type.toLowerCase().replace(/\s+/g, '-')}`;
+    const el = document.getElementById(id);
+    if (el) {
+      const val = totals[p.type] || 0;
+      if (el.innerText !== "..." && el.innerText !== val.toLocaleString()) {
+        el.classList.add('bump');
+        setTimeout(() => el.classList.remove('bump'), 500);
+      }
+      el.innerText = val.toLocaleString();
+    }
+  });
+};
+
+const changeLocalCount = (type, delta) => {
+  state.localPrayers[type] = Math.max(0, (state.localPrayers[type] || 0) + delta);
+  const id = `local-${type.toLowerCase().replace(/\s+/g, '-')}`;
+  const el = document.getElementById(id);
+  if (el) el.innerText = state.localPrayers[type];
+};
+
+const submitLocalPrayers = async (type) => {
+  const count = state.localPrayers[type];
+  if (count <= 0) return;
+
+  const cardId = `card-${type.toLowerCase().replace(/\s+/g, '-')}`;
+  const card = document.getElementById(cardId);
+  const btn = card?.querySelector('.offer-btn');
 
   try {
-    // using no-cors as required for Google Form submission via fetch
-    await fetch(INTERCESSION_FORM_URL, {
-      method: "POST",
-      body: formData,
-      mode: "no-cors"
+    if (btn) { btn.disabled = true; btn.innerText = "Sending..."; }
+
+    const body = new URLSearchParams({
+      [CONFIG.fields.prayerType]: type,
+      [CONFIG.fields.prayerCount]: count
     });
-  } catch (error) {
-    console.error("Submission error:", error);
+
+    await fetch(CONFIG.intercessionFormUrl, { method: 'POST', body, mode: 'no-cors' });
+
+    if (card) card.classList.add('offered');
+    setTimeout(fetchPrayerTotals, 1000);
+  } catch (e) {
+    if (btn) { btn.disabled = false; btn.innerText = "Retry"; }
   }
+};
 
-  // 4. Re-enable buttons after a delay
-  setTimeout(() => {
-    buttons.forEach(btn => btn.disabled = false);
-    fetchPrayerTotals(); // Fetch latest totals after submission
-  }, 2000);
-}
+const resetCard = (type) => {
+  const idPrefix = type.toLowerCase().replace(/\s+/g, '-');
+  const card = document.getElementById(`card-${idPrefix}`);
+  if (card) {
+    card.classList.remove('offered');
+    state.localPrayers[type] = 0;
+    const label = document.getElementById(`local-${idPrefix}`);
+    if (label) label.innerText = "0";
+    const btn = card.querySelector('.offer-btn');
+    if (btn) { btn.disabled = false; btn.innerText = "Offer Prayers"; }
+  }
+};
 
-// Initial fetch and interval
-document.addEventListener("DOMContentLoaded", () => {
-  fetchPrayerTotals();
-  setInterval(fetchPrayerTotals, 5000); // Refresh every 5 seconds
-});
+// --- Global Exports ---
+// Exposing these functions to the window so they can be called from HTML onclick/onchange
+window.handleFileSelect = handleFileSelect;
+window.toggleOtherParish = toggleOtherParish;
+window.changeLocalCount = changeLocalCount;
+window.submitLocalPrayers = submitLocalPrayers;
+window.resetCard = resetCard;
+
+// --- Utils ---
+const initSmoothScroll = () => {
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+};
