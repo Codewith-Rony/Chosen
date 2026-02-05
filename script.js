@@ -16,17 +16,18 @@ const CONFIG = {
     prayerType: "entry.941995307",
     prayerCount: "entry.1423921248",
     paymentLink: "entry.1783117236",
-    parish: "entry.349600665"
+    parish: "entry.349600665",
+    parishOther: "entry.1113301371"
   },
   intercessions: [
-    { type: "Hail Mary", icon: "🌸", description: "Your effort matters." },
-    { type: "Our Father", icon: "🙏", description: "Your effort matters." },
-    { type: "Memorare", icon: "📜", description: "Your effort matters." },
-    { type: "Creed", icon: "✝️", description: "Your effort matters." },
-    { type: "Rosary", icon: "📿", description: "Your effort matters." },
-    { type: "Mercy Rosary", icon: "🥀", description: "Your effort matters." },
-    { type: "Holy Mass", icon: "⛪", description: "Your effort matters." },
-    { type: "Fasting", icon: "🍞", description: "Your effort matters." }
+    { type: "Hail Mary", description: "Interceding through our Blessed Mother." },
+    { type: "Our Father", description: "Praying as Jesus taught us." },
+    { type: "Memorare", description: "Seeking the protection of Mary." },
+    { type: "Creed", description: "Proclaiming our shared faith." },
+    { type: "Rosary", description: "Meditating on the mysteries." },
+    { type: "Mercy Rosary", description: "Appealing to His Divine Mercy." },
+    { type: "Holy Mass", description: "The source and summit of life." },
+    { type: "Fasting", description: "Sacrificing for his glory." }
   ]
 };
 
@@ -70,7 +71,6 @@ const renderDynamicContent = () => {
     elements.intercessionGrid.innerHTML = CONFIG.intercessions.map(p => `
       <div class="intercession-card" data-prayer="${p.type}" id="card-${p.type.toLowerCase().replace(/\s+/g, '-')}">
         <div class="card-main">
-          <div class="card-icon">${p.icon}</div>
           <h3>${p.type}</h3>
           <div class="count" id="count-${p.type.toLowerCase().replace(/\s+/g, '-')}">...</div>
           <p class="count-label">Global Total</p>
@@ -181,12 +181,30 @@ const initRegistration = () => {
       const formData = new FormData(elements.regForm);
       const submissionData = new URLSearchParams();
 
-      // Add all core fields
-      for (const [key, value] of formData.entries()) {
-        submissionData.append(key, value);
+      // Explicitly Handle Parish Mapping
+      const parishSelect = document.getElementById('parish_select');
+      const parishOtherInput = document.getElementById('other_parish');
+
+      let mainParishValue = parishSelect.value;
+      let otherParishValue = "";
+
+      if (mainParishValue === 'other') {
+        mainParishValue = "Other"; // Send "Others" to the primary field
+        otherParishValue = parishOtherInput.value; // Send custom name to the secondary field
       }
 
-      // Add the payment link obtained from GAS
+      // Add all core fields except those we handle manually
+      for (const [key, value] of formData.entries()) {
+        if (key !== CONFIG.fields.parish && key !== CONFIG.fields.parishOther) {
+          submissionData.append(key, value);
+        }
+      }
+
+      // Add the final mapping
+      submissionData.append(CONFIG.fields.parish, mainParishValue);
+      if (otherParishValue) {
+        submissionData.append(CONFIG.fields.parishOther, otherParishValue);
+      }
       submissionData.append(CONFIG.fields.paymentLink, uploadResp.link);
 
       // Final POST to Google Forms
@@ -272,21 +290,13 @@ window.handleFileSelect = handleFileSelect;
 const toggleOtherParish = (val) => {
   const group = document.getElementById('other-parish-group');
   const input = document.getElementById('other_parish');
-  const select = document.getElementById('parish_select');
-  const parishEntryId = "entry.349600665";
 
   const isOther = val === 'other';
   group.style.display = isOther ? 'block' : 'none';
   input.required = isOther;
 
-  if (isOther) {
-    // When "Other" is selected, the custom input field takes over the Parish entry ID
-    select.removeAttribute('name');
-    input.setAttribute('name', CONFIG.fields.parish);
-  } else {
-    // When a predefined parish is selected, the dropdown uses the Parish entry ID
-    select.setAttribute('name', CONFIG.fields.parish);
-    input.removeAttribute('name');
+  if (!isOther) {
+    input.value = ''; // Clear if they switch back
   }
 };
 
