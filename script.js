@@ -9,7 +9,7 @@ const CONFIG = {
   slideInterval: 5000,
   prayerRefreshInterval: 8000,
   formStorageKey: 'chosen_2026_reg_form',
-  gasUploadUrl: "https://script.google.com/macros/s/AKfycbwelH6EmxgOE5W4ds0lnLhNJPjSwkbBULzBU66BRc5cs_oWo2A9E5UAO1XsPcdZq59C/exec",
+  gasUploadUrl: "https://script.google.com/macros/s/AKfycbyE58Oqa9a6llkc3UUfMfzstZDEuIjgfrjWY-BIcOpDHEhJdVjnGO0sgpquRcJ72AHc/exec",
   regFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLScA0bsPDocm0PwPZJVWdehvWoaWDpsO4votctEkZPbezeTGPA/formResponse",
   intercessionFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc4gO2CAUQszRyTXvz_Abguu0x4RK6_YePiLlBd6XZRUScyQw/formResponse",
   intercessionSheetUrl: "https://docs.google.com/spreadsheets/d/1eV5MnL10zexogVszd8qJH-OODmB0Atelw-Lok_X1yBs/gviz/tq?tqx=out:json&gid=1891816628",
