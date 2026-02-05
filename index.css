@@ -1147,13 +1147,26 @@ nav {
     font-size: 18px;
 }
 
+.success-message {
+    text-align: center;
+    padding: 60px 40px;
+    color: var(--gold-accent);
+}
+
+.success-message h3 {
+    margin-bottom: 15px;
+    font-size: 28px;
+}
+
 @media (max-width: 768px) {
     .form-wrapper {
         padding: 25px 20px;
+        margin-top: 20px;
     }
 
     .form-grid {
         grid-template-columns: 1fr;
+        gap: 15px;
     }
 
     .form-group.full-width {
@@ -1164,6 +1177,52 @@ nav {
         flex-direction: column;
         align-items: center;
         text-align: center;
+        gap: 20px;
+    }
+
+    .payment-info-section {
+        padding: 20px !important;
+    }
+
+    .success-message {
+        padding: 40px 20px;
+    }
+
+    .bank-details p strong {
+        width: 80px;
+        font-size: 10px;
+    }
+
+    .btn.large {
+        padding: 14px 24px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-wrapper {
+        padding: 20px 15px;
+        border-radius: 8px;
+    }
+
+    .form-group label {
+        font-size: 12px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 10px 14px;
+        font-size: 16px;
+        /* Prevents auto-zoom on iOS */
+    }
+
+    .payment-info-section h3 {
+        font-size: 20px;
+    }
+
+    .qr-code-wrapper {
+        width: 120px;
     }
 }
 
