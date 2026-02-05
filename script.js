@@ -8,16 +8,14 @@
 const CONFIG = {
   slideInterval: 5000,
   prayerRefreshInterval: 8000,
-  formStorageKey: 'chosen_2026_reg_form',
   gasUploadUrl: "https://script.google.com/macros/s/AKfycbyE58Oqa9a6llkc3UUfMfzstZDEuIjgfrjWY-BIcOpDHEhJdVjnGO0sgpquRcJ72AHc/exec",
   regFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLScA0bsPDocm0PwPZJVWdehvWoaWDpsO4votctEkZPbezeTGPA/formResponse",
   intercessionFormUrl: "https://docs.google.com/forms/d/e/1FAIpQLSc4gO2CAUQszRyTXvz_Abguu0x4RK6_YePiLlBd6XZRUScyQw/formResponse",
   intercessionSheetUrl: "https://docs.google.com/spreadsheets/d/1eV5MnL10zexogVszd8qJH-OODmB0Atelw-Lok_X1yBs/gviz/tq?tqx=out:json&gid=1891816628",
   fields: {
-    paymentLink: "entry.1783117236",
     prayerType: "entry.941995307",
     prayerCount: "entry.1423921248",
-    parish: "entry.349600665"
+    paymentLink: "entry.1783117236"
   },
   intercessions: [
     { type: "Hail Mary", icon: "🌸", description: "Your effort matters." },
@@ -47,21 +45,22 @@ const elements = {
   preloader: document.getElementById('preloader'),
   slides: document.querySelectorAll('.carousel-slide'),
   dots: document.querySelectorAll('.dot'),
+  intercessionGrid: document.querySelector('.intercession-grid'),
   regForm: document.getElementById('registration-form'),
-  formMessage: document.getElementById('form-message'),
   fileInput: document.getElementById('payment_screenshot'),
   filePreview: document.getElementById('file-preview'),
-  intercessionGrid: document.querySelector('.intercession-grid'),
-  parishSelect: document.getElementById('parish_select')
+  uploadStatus: document.getElementById('upload-status'),
+  formSuccess: document.getElementById('form-success'),
+  submitBtn: document.getElementById('submit-btn')
 };
 
 // --- Initialization ---
 document.addEventListener('DOMContentLoaded', () => {
   renderDynamicContent();
   initPreloader();
-  initForm();
   initIntercessions();
   initSmoothScroll();
+  initRegistration();
 });
 
 const renderDynamicContent = () => {
@@ -154,66 +153,75 @@ const initCarousel = () => {
   });
 };
 
-// --- Registration Form ---
-const initForm = () => {
+// --- Registration Logic ---
+const initRegistration = () => {
   if (!elements.regForm) return;
-
-  loadFormData();
-  elements.regForm.addEventListener('input', saveFormData);
 
   elements.regForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const btn = elements.regForm.querySelector('button[type="submit"]');
-    const originalText = btn.innerText;
+
+    // 1. Validate Form
+    if (!validateForm()) return;
+
+    const originalBtnText = elements.submitBtn.innerText;
 
     try {
+      // 2. Prepare for Upload
+      setLoadingState(true);
+
       const file = elements.fileInput.files[0];
-      if (!file) throw new Error("Please upload a payment screenshot.");
+      if (!file) throw new Error("Payment screenshot is required.");
 
-      btn.disabled = true;
-      btn.innerText = "Processing Payment...";
+      // 3. Upload to Google Apps Script
+      const uploadResp = await uploadToGAS(file);
+      if (!uploadResp.success) throw new Error(uploadResp.error || "Image upload failed.");
 
-      // 1. Upload to Drive
-      const uploadResp = await uploadFileToGAS(file);
-      if (!uploadResp.success) throw new Error(uploadResp.error || "Upload failed");
-
-      // 2. Submit Form
-      btn.innerText = "Finalizing Registration...";
-
+      // 4. Submit to Google Form
+      const formData = new FormData(elements.regForm);
       const submissionData = new URLSearchParams();
-      const currentFormData = new FormData(elements.regForm);
 
-      // Add all text fields, skip binary file data (Google Forms rejects binary)
-      for (const [key, value] of currentFormData.entries()) {
-        if (!(value instanceof File)) {
-          submissionData.append(key, value);
-        }
+      // Add all core fields
+      for (const [key, value] of formData.entries()) {
+        submissionData.append(key, value);
       }
 
-      // Specifically add the payment link generated from the upload
+      // Add the payment link obtained from GAS
       submissionData.append(CONFIG.fields.paymentLink, uploadResp.link);
 
+      // Final POST to Google Forms
       await fetch(CONFIG.regFormUrl, {
         method: 'POST',
         body: submissionData,
         mode: 'no-cors'
       });
 
-      // 3. Success UI
-      handleFormSuccess();
-      localStorage.removeItem(CONFIG.formStorageKey);
+      // 5. Handling Success
+      handleRegistrationSuccess();
     } catch (err) {
       alert(err.message);
-      btn.disabled = false;
-      btn.innerText = originalText;
+      setLoadingState(false, originalBtnText);
     }
   });
 };
 
-const handleFormSuccess = () => {
-  elements.regForm.style.display = 'none';
-  elements.formMessage.style.display = 'block';
-  elements.formMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+const validateForm = () => {
+  // Simple validation for required fields (browser already does some via 'required')
+  // We double check the file type here
+  const file = elements.fileInput.files[0];
+  if (file) {
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    if (!validTypes.includes(file.type)) {
+      alert("Please upload a valid image file (JPG, JPEG, or PNG).");
+      return false;
+    }
+  }
+  return true;
+};
+
+const setLoadingState = (isLoading, btnText = "Submit Registration") => {
+  elements.submitBtn.disabled = isLoading;
+  elements.submitBtn.innerText = isLoading ? "Processing..." : btnText;
+  elements.uploadStatus.style.display = isLoading ? "block" : "none";
 };
 
 const handleFileSelect = (input) => {
@@ -221,70 +229,69 @@ const handleFileSelect = (input) => {
   if (file && elements.filePreview) {
     const reader = new FileReader();
     reader.onload = (e) => {
-      elements.filePreview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-height: 300px; border-radius: 8px;">`;
+      elements.filePreview.innerHTML = `<img src="${e.target.result}" alt="Preview" style="max-height: 250px; border-radius: 8px;">`;
     };
     reader.readAsDataURL(file);
   }
 };
 
-const uploadFileToGAS = async (file) => {
-  const base64 = await toBase64(file);
-  const params = new URLSearchParams({
-    file: base64.split(',')[1],
+const uploadToGAS = async (file) => {
+  const base64Content = await toBase64(file);
+  const body = new URLSearchParams({
+    file: base64Content.split(',')[1],
     filename: file.name,
     type: file.type
   });
 
-  const resp = await fetch(CONFIG.gasUploadUrl, { method: 'POST', body: params });
-  return await resp.json();
+  const response = await fetch(CONFIG.gasUploadUrl, {
+    method: 'POST',
+    body: body
+  });
+
+  return await response.json();
 };
 
-const toBase64 = (file) => new Promise((res, rej) => {
+const toBase64 = (file) => new Promise((resolve, reject) => {
   const reader = new FileReader();
   reader.readAsDataURL(file);
-  reader.onload = () => res(reader.result);
-  reader.onerror = rej;
+  reader.onload = () => resolve(reader.result);
+  reader.onerror = (error) => reject(error);
 });
 
-// --- Local Storage Persistence ---
-const saveFormData = () => {
-  const data = {};
-  new FormData(elements.regForm).forEach((val, key) => data[key] = val);
-  localStorage.setItem(CONFIG.formStorageKey, JSON.stringify(data));
+const handleRegistrationSuccess = () => {
+  elements.regForm.style.display = 'none';
+  elements.formSuccess.style.display = 'block';
+  elements.formSuccess.scrollIntoView({ behavior: 'smooth', block: 'center' });
 };
 
-const loadFormData = () => {
-  const saved = localStorage.getItem(CONFIG.formStorageKey);
-  if (!saved) return;
-  const data = JSON.parse(saved);
-  Object.keys(data).forEach(key => {
-    const field = elements.regForm.querySelector(`[name="${key}"]`);
-    if (field) field.value = data[key];
-  });
-  // Check parish state
-  const parishSelect = document.getElementById('parish_select');
-  if (parishSelect?.value === 'other') toggleOtherParish('other');
-};
+// Expose handleFileSelect globally for HTML onchange
+window.handleFileSelect = handleFileSelect;
 
-// --- Parish Toggle ---
+// --- Parish Toggle Logic ---
 const toggleOtherParish = (val) => {
   const group = document.getElementById('other-parish-group');
   const input = document.getElementById('other_parish');
   const select = document.getElementById('parish_select');
+  const parishEntryId = "entry.349600665";
 
   const isOther = val === 'other';
   group.style.display = isOther ? 'block' : 'none';
   input.required = isOther;
 
   if (isOther) {
+    // When "Other" is selected, the input field gets the entry ID name
     select.removeAttribute('name');
-    input.setAttribute('name', CONFIG.fields.parish);
+    input.setAttribute('name', parishEntryId);
   } else {
-    select.setAttribute('name', CONFIG.fields.parish);
+    // When a predefined parish is selected, the select field gets the entry ID name
+    select.setAttribute('name', parishEntryId);
     input.removeAttribute('name');
   }
-  saveFormData();
 };
+
+window.toggleOtherParish = toggleOtherParish;
+
+
 
 // --- Community Intercessions ---
 const initIntercessions = () => {
@@ -377,8 +384,6 @@ const resetCard = (type) => {
 
 // --- Global Exports ---
 // Exposing these functions to the window so they can be called from HTML onclick/onchange
-window.handleFileSelect = handleFileSelect;
-window.toggleOtherParish = toggleOtherParish;
 window.changeLocalCount = changeLocalCount;
 window.submitLocalPrayers = submitLocalPrayers;
 window.resetCard = resetCard;

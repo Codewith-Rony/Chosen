@@ -311,40 +311,51 @@
     <!-- </div>
     </section> --> -->
 
+
+
     <!-- Registration Section -->
     <section id="register" class="dark-bg reveal">
         <div class="registration-container">
             <h2 class="center-text">Register Now</h2>
             <p class="center-text gold-text">Limited Seats Available!</p>
             <div class="form-wrapper">
-                <form
-                    action="https://docs.google.com/forms/d/e/1FAIpQLScA0bsPDocm0PwPZJVWdehvWoaWDpsO4votctEkZPbezeTGPA/formResponse"
-                    method="POST" target="hidden_iframe" id="registration-form">
+                <form id="registration-form" class="registration-form">
                     <div class="form-grid">
+                        <!-- Full Name -->
                         <div class="form-group">
                             <label for="name">Full Name*</label>
                             <input type="text" id="name" name="entry.2091411726" placeholder="Your Full Name" required>
                         </div>
+
+                        <!-- Email -->
                         <div class="form-group">
                             <label for="email">Email ID*</label>
                             <input type="email" id="email" name="entry.1028874845" placeholder="yourname@email.com"
                                 required>
                         </div>
+
+                        <!-- Parent's Number -->
                         <div class="form-group">
-                            <label for="mobile">Parent's Number (Whatsapp)*</label>
+                            <label for="mobile">Parent's Number (WhatsApp)*</label>
                             <input type="tel" id="mobile" name="entry.1828037736" placeholder="10-digit number" required
                                 pattern="[0-9]{10}">
                         </div>
+
+                        <!-- Mobile Number (Optional) -->
                         <div class="form-group">
                             <label for="alt_mobile">Mobile Number (Alternate)</label>
                             <input type="tel" id="alt_mobile" name="entry.1730163662" placeholder="10-digit number"
                                 pattern="[0-9]{10}">
                         </div>
+
+                        <!-- Address -->
                         <div class="form-group full-width">
                             <label for="address">Address*</label>
                             <textarea id="address" name="entry.2057962909" placeholder="Your full address" rows="3"
                                 required></textarea>
                         </div>
+
+                        <!-- Gender -->
                         <div class="form-group">
                             <label for="gender">Gender*</label>
                             <select id="gender" name="entry.1030283989" required>
@@ -353,6 +364,8 @@
                                 <option value="Female">Female</option>
                             </select>
                         </div>
+
+                        <!-- Class -->
                         <div class="form-group">
                             <label for="class">Class*</label>
                             <select id="class" name="entry.146500009" required>
@@ -362,13 +375,16 @@
                                 <option value="10">10</option>
                                 <option value="11">11</option>
                                 <option value="12">12</option>
-                                <option value="+2 passout">+2 passout</option>
+                                <option value="12">+2 Passout</option>
+
                             </select>
                         </div>
+
+                        <!-- Parish -->
                         <div class="form-group">
-                            <label for="parish">Parish / Church*</label>
+                            <label for="parish_select">Parish / Church*</label>
                             <select id="parish_select" name="entry.349600665" required
-                                onchange="toggleOtherParish(this.value)" aria-label="Select your Parish">
+                                onchange="toggleOtherParish(this.value)">
                                 <option value="" disabled selected>Select your Parish</option>
                                 <option value="Alampally St. Dominic">Alampally St. Dominic</option>
                                 <option value="Amalagiri St. Thomas">Amalagiri St. Thomas</option>
@@ -477,8 +493,8 @@
                                 <option value="Panapilavu St. Joseph">Panapilavu St. Joseph</option>
                                 <option value="Pathanamthitta Mary Matha Forane">Pathanamthitta Mary Matha Forane
                                 </option>
-                                <option value="Pazhayidom St. Michael">Pazhayidom St. Michael</option>
                                 <option value="Pazhaya Koratty">Pazhaya Koratty</option>
+                                <option value="Pazhayidom St. Michael">Pazhayidom St. Michael</option>
                                 <option value="Peermade St. Mary">Peermade St. Mary</option>
                                 <option value="Periyar Vallakadavu St. Joseph">Periyar Vallakadavu St. Joseph</option>
                                 <option value="Perunadu St. Jude">Perunadu St. Jude</option>
@@ -529,40 +545,42 @@
                                 <option value="other">Other</option>
                             </select>
                         </div>
+
                         <div class="form-group full-width" id="other-parish-group" style="display:none;">
                             <label for="other_parish">Please specify your Parish*</label>
                             <input type="text" id="other_parish" placeholder="Enter your Parish name">
                         </div>
+
+                        <!-- School -->
                         <div class="form-group">
                             <label for="school">School*</label>
                             <input type="text" id="school" name="entry.621038986" placeholder="Name of your School"
                                 required>
                         </div>
+
+                        <!-- Payment Screenshot Info -->
                         <div class="form-group full-width payment-info-section">
                             <div class="payment-instructions">
                                 <h3>Payment Information</h3>
-                                <p class="payment-advance-note">₹500 is collected as an advance. Please pay the amount
-                                    and upload the screenshot below.</p>
-
+                                <p class="payment-advance-note">₹500 is collected as an registration fee. Please pay the
+                                    amount via QR/Bank and upload the screenshot.</p>
                                 <div class="payment-flex-container">
                                     <div class="qr-code-wrapper">
-                                        <img src="assets/QR.jpeg" alt="Scan to pay ₹500" class="payment-qr"
-                                            loading="lazy" decoding="async">
+                                        <img src="assets/QR.jpeg" alt="Scan to pay ₹500" class="payment-qr">
                                         <p class="qr-label">Scan to Pay</p>
                                     </div>
-
                                     <div class="bank-details">
                                         <h4>Bank Details</h4>
-                                        <p><strong>Name:</strong> <span>Sreyas Amal Raj</span></p>
-                                        <p><strong>Phone:</strong> <span>9074568307</span></p>
-                                        <p><strong>Account:</strong> <span>196601000009158</span></p>
-                                        <p><strong>IFSC:</strong> <span>IOB0001966</span></p>
-                                        <p><strong>Branch:</strong> <span>Anakkal</span></p>
+                                        <p><strong>Name:</strong> Sreyas Amal Raj</p>
+                                        <p><strong>Phone:</strong> 9074568307</p>
+                                        <p><strong>Acc:</strong> 196601000009158</p>
+                                        <p><strong>IFSC:</strong> IOB0001966</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
+                        <!-- File Upload -->
                         <div class="form-group full-width">
                             <label for="payment_screenshot">Upload Payment Screenshot*</label>
                             <div class="file-upload-wrapper">
@@ -574,15 +592,22 @@
                             </div>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary large full-width">Submit Registration</button>
+
+                    <!-- Submit -->
+                    <button type="submit" id="submit-btn" class="btn btn-primary large full-width">Submit
+                        Registration</button>
+                    <p id="upload-status"
+                        style="display:none; text-align:center; margin-top:15px; color: var(--gold-accent); font-weight: 600;">
+                        Uploading payment screenshot...
+                    </p>
                 </form>
-                <div id="form-message"
-                    style="display:none; text-align:center; padding: 20px; color: var(--gold-accent);">
-                    <h3>Thank you for registering!</h3>
-                    <p>We will get in touch with you soon.</p>
+
+                <div id="form-success"
+                    style="display:none; text-align:center; padding: 40px; color: var(--gold-accent);">
+                    <!-- <div style="font-size: 60px; margin-bottom: 20px;">✨</div> -->
+                    <h3>Registration submitted successfully!</h3>
+                    <p>We have received your details. We will get in touch with you soon.</p>
                 </div>
-                <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
-                    onload="if(submitted){handleFormSubmit();}"></iframe>
             </div>
         </div>
     </section>

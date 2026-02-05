@@ -963,6 +963,9 @@ nav {
     transform: scale(1.1);
 }
 
+
+
+
 /* Registration */
 .registration-container {
     max-width: 900px;
@@ -1025,12 +1028,10 @@ nav {
 /* Payment Info Styles */
 .payment-info-section {
     background: #ffffff;
-    /* Contrast against dark background */
     border-radius: 12px;
     padding: 30px !important;
-    border: none;
+    border: 1px solid rgba(0, 0, 0, 0.05);
     margin-bottom: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
 .payment-instructions h3 {
@@ -1041,10 +1042,9 @@ nav {
 }
 
 .payment-advance-note {
-    font-size: 16px;
+    font-size: 15px;
     color: var(--primary-black);
-    margin-bottom: 25px;
-    font-weight: 500;
+    margin-bottom: 20px;
 }
 
 .payment-flex-container {
@@ -1059,7 +1059,7 @@ nav {
     background: var(--off-white);
     padding: 12px;
     border-radius: 8px;
-    width: 160px;
+    width: 140px;
 }
 
 .payment-qr {
@@ -1070,58 +1070,32 @@ nav {
 
 .qr-label {
     color: var(--primary-black);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 700;
     margin-top: 8px;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .bank-details h4 {
     color: var(--deep-red);
-    margin-bottom: 12px;
+    margin-bottom: 10px;
     font-size: 16px;
     border-bottom: 2px solid var(--gold-accent);
-    padding-bottom: 4px;
+    padding-bottom: 2px;
     display: inline-block;
-    text-transform: uppercase;
-    letter-spacing: 1px;
 }
 
 .bank-details p {
-    margin-bottom: 6px;
-    font-size: 15px;
-    color: var(--primary-black);
+    margin-bottom: 4px;
+    font-size: 14px;
 }
 
 .bank-details p strong {
-    color: var(--deep-red);
-    width: 85px;
+    width: 70px;
     display: inline-block;
-    font-size: 12px;
+    color: #555;
+    font-size: 11px;
     text-transform: uppercase;
-    opacity: 0.7;
-}
-
-.bank-details p span {
-    font-weight: 600;
-}
-
-@media (max-width: 600px) {
-    .payment-flex-container {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .qr-code-wrapper {
-        margin: 0 auto;
-    }
-
-    .bank-details p strong {
-        display: block;
-        width: 100%;
-        margin-bottom: 2px;
-    }
 }
 
 /* File Upload Styles */
@@ -1132,44 +1106,40 @@ nav {
 }
 
 #payment_screenshot {
-    border: 2px dashed rgba(255, 255, 255, 0.2);
-    background: rgba(255, 255, 255, 0.03);
-    padding: 30px;
+    border: 2px dashed #ddd;
+    padding: 20px;
     text-align: center;
     cursor: pointer;
     width: 100%;
-    margin-bottom: 0;
+    background: var(--off-white);
+    border-radius: 8px;
 }
 
 #payment_screenshot:hover {
     border-color: var(--gold-accent);
-    background: rgba(255, 255, 255, 0.05);
 }
 
 .file-upload-preview {
     width: 100%;
-    min-height: 150px;
-    background: rgba(255, 255, 255, 0.03);
+    min-height: 100px;
+    background: var(--off-white);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #ddd;
 }
 
 .file-upload-preview img {
     max-width: 100%;
-    max-height: 300px;
+    max-height: 250px;
     object-fit: contain;
-    border-radius: 4px;
 }
 
 .preview-text {
-    color: rgba(255, 255, 255, 0.4);
-    font-size: 14px;
-    font-style: italic;
+    color: #999;
+    font-size: 13px;
 }
 
 .btn.large {
@@ -1177,10 +1147,25 @@ nav {
     font-size: 18px;
 }
 
-.btn.full-width {
-    width: 100%;
-}
+@media (max-width: 768px) {
+    .form-wrapper {
+        padding: 25px 20px;
+    }
 
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-group.full-width {
+        grid-column: span 1;
+    }
+
+    .payment-flex-container {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
 
 /* Footer */
 footer {
@@ -1340,44 +1325,7 @@ footer {
         align-items: center;
     }
 
-    /* Form Optimization */
-    .form-wrapper {
-        padding: 40px 25px;
-        margin-top: 25px;
-        border-radius: 12px;
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
-    }
 
-    .form-grid {
-        grid-template-columns: 1fr;
-        gap: 25px;
-    }
-
-    .form-group.full-width {
-        grid-column: span 1;
-    }
-
-    .form-group label {
-        font-size: 12px;
-        margin-bottom: 6px;
-        font-weight: 700;
-        opacity: 0.9;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-        padding: 14px 18px;
-        font-size: 16px;
-        width: 100%;
-        border-radius: 8px;
-    }
-
-    .btn.large {
-        padding: 16px 32px;
-        font-size: 18px;
-        margin-top: 15px;
-    }
 
     /* Horizontal Gallery on Mobile */
     .gallery-grid {
@@ -1428,47 +1376,4 @@ footer {
     100% {
         transform: scale(1);
     }
-}
-/* Upload Progress Bar */
-.upload-progress-container {
-    margin-top: 15px;
-    background: rgba(255, 255, 255, 0.05);
-    padding: 15px;
-    border-radius: 8px;
-    border: 1px solid rgba(255, 194, 0, 0.2);
-}
-
-.progress-info {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 8px;
-    font-size: 13px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-#upload-status-text {
-    color: var(--gold-accent);
-}
-
-#upload-percentage-text {
-    color: var(--off-white);
-    opacity: 0.8;
-}
-
-.progress-bar-bg {
-    width: 100%;
-    height: 8px;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
-}
-
-.progress-bar-fill {
-    width: 0%;
-    height: 100%;
-    background: linear-gradient(90deg, var(--gold-accent), #FFD700);
-    box-shadow: 0 0 10px rgba(255, 194, 0, 0.5);
-    transition: width 0.3s ease;
 }
