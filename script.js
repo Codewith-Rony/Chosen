@@ -15,7 +15,8 @@ const CONFIG = {
   fields: {
     prayerType: "entry.941995307",
     prayerCount: "entry.1423921248",
-    paymentLink: "entry.1783117236"
+    paymentLink: "entry.1783117236",
+    parish: "entry.349600665"
   },
   intercessions: [
     { type: "Hail Mary", icon: "🌸", description: "Your effort matters." },
@@ -279,12 +280,12 @@ const toggleOtherParish = (val) => {
   input.required = isOther;
 
   if (isOther) {
-    // When "Other" is selected, the input field gets the entry ID name
+    // When "Other" is selected, the custom input field takes over the Parish entry ID
     select.removeAttribute('name');
-    input.setAttribute('name', parishEntryId);
+    input.setAttribute('name', CONFIG.fields.parish);
   } else {
-    // When a predefined parish is selected, the select field gets the entry ID name
-    select.setAttribute('name', parishEntryId);
+    // When a predefined parish is selected, the dropdown uses the Parish entry ID
+    select.setAttribute('name', CONFIG.fields.parish);
     input.removeAttribute('name');
   }
 };
