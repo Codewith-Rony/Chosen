@@ -28,49 +28,6 @@ const CONFIG = {
     { type: "Mercy Rosary", icon: "🥀", description: "Your effort matters." },
     { type: "Holy Mass", icon: "⛪", description: "Your effort matters." },
     { type: "Fasting", icon: "🍞", description: "Your effort matters." }
-  ],
-  parishes: [
-    "Alampally St. Dominic", "Amalagiri St. Thomas", "Amaravathy St. Joseph", "Anakkal St. Antony",
-    "Anakkara St. Thomas Forane", "Anavilasam St. George", "Anchilippa Pius X", "Angel Valley St. Mary",
-    "Anickad St. Mary", "Aniyartholu St. Thomas", "Arayanjilimannu St. Joseph", "Azhangadu St. Antony",
-    "Chakkupallam Carmala Matha", "Chamampathal Fathim Matha", "Cheenkalthadam St. Joseph",
-    "Chellarkovil Mar Sleeva", "Chembalam St. Mary", "Chembanoly St. Sebastian", "Chemmannu St. Thomas",
-    "Chengalam St. Antony", "Chenkal Sacred Heart", "Chennakkunnu St. George", "Cheruvallikulam St. George",
-    "Cheruvally St. Mary", "Chinnar St. George", "Chottupara St. Gianna", "Cumbammettu St. Joseph",
-    "Edakkunnam Velankanni Matha", "Edamon St. Mary", "Elamgulam St. Mary", "Elangoi Holy Cross",
-    "Elappara St. Alphonsa", "Elikkulam Infant Jesus", "Elivalikkara St. Antony", "Erumely Assumption Forane",
-    "Eruthvapuzha Infant Jesus", "Geenvalley Infant Jesus", "Grace Mount Grace Matha", "Inchiyani Holy Family",
-    "John Paul Nagar St. John Paul II", "Kalthotty Holy Family", "Kanamala St.Thomas", "Kanayankavayal St. Mary",
-    "Kanchiyar St. Mary", "Kanjirapally St. Dominic Cathedral", "Kannampally St. Mary", "Kannimala St. Joseph",
-    "Kappad Holy Cross", "Karikattoor St. Antony", "Karikulam Fathima Matha", "Karunapuram St. Mary",
-    "Kattappana St. George Forane", "Keerikkara St. Antony", "Kizhakkemattukatta St. Thomas",
-    "Kochera St. Joseph", "Kochuthovala St. Joseph", "Kollamula Maria Goretti", "Konni St. Jude",
-    "Koothattukulam (Chittar) Assumption", "Koovapally St. Joseph", "Koratty New St. Joseph",
-    "Koruthodu St. George", "Kozhancherry Holy Family", "Kumily-Attapallam St. Thomas Forane",
-    "Kunnumbhagam St. Joseph", "Kurumpanmoozhy St. Thomas", "Kuzhitholu St. Sebastian", "Madukka St. Mathew",
-    "Mangapara Nithyasahaya Matha", "Mangapetta St. Thomas", "Manipuzha Christ the King",
-    "Mariagiri St. Sebastian", "Marykulam St. George", "Meenkuzhy Little Flower", "Meloram St. Sebastian",
-    "Meppara Lourde Matha", "Mlamala Fathima Matha", "Mukkoottuthara St. Thomas", "Mukkulam St. George",
-    "Mulankunnu Infant Jesus", "Mundakayam Our Lady of Dolours", "Mundakayam St Mary’s Latin Church",
-    "Mundiyeruma Assumption", "Murinjapuzha St. George", "Nallathanny Holy Family", "Narianpara Holy Cross",
-    "Nazranipuram St. Mathew", "Nettithozhu St. Isidore", "Neyyattussery St. George",
-    "Nilackal-Thulapally Marthoma Sleeha", "Niravu St. Mary", "Nirmalagiri St. Antony",
-    "Nirmalapuram Holy Family", "Padanilam St. Sebastian", "Palampra Gethsemene", "Palapra Vimala Matha",
-    "Paloorkavu St. George", "Pampadumpara St. George", "Panapilavu St. Joseph",
-    "Pathanamthitta Mary Matha Forane", "Pazhaya Koratty", "Pazhayidom St. Michael", "Peermade St. Mary",
-    "Periyar Vallakadavu St. Joseph", "Perunadu St. Jude", "Perunthenaruvi St. Joseph",
-    "Peruvanthanam St. Joseph Forane", "Pezhumpara Sacred Heart", "Plachery Fathima Matha",
-    "Podimattam St. Mary", "Podimattam St. Joseph Latin Church", "Ponkunnam Holy Family Forane",
-    "Poomattam St. Thomas", "Pulianmala St. Antony", "Pulinkatta St. George", "Pullanithakidy St. Rita",
-    "Pullikkanam St. Thomas", "Punchavayal St. Sebastian", "Purakkayam St. Joseph", "Puttady Velankanni Matha",
-    "Rajagiri Christu Raj", "Ramakalmettu Sacred Heart", "Ranni Infanat Jesus Forane", "Santhigiri St. George",
-    "Sanyasioda St. Antony", "Seethathodu St. George", "Swaraj St. Paul", "Thachapuzha St. Mary",
-    "Thamarakunnu St. Ephrem", "Thampalakadu St. Thomas", "Tharakanattukunnu St. Antony",
-    "Thekkemala St. Mary", "Third Camp St. Joseph", "Uluppooni St. Alphonsa", "Umikuppa Lourde Matha",
-    "Upputhara St. Mary Forane", "Thachapuzha St. Mary", "Vadakkemala St. Sebastian", "Vakayar Infant Jesus",
-    "Valiyathovala Christ Raj", "Vallakadavu St. Antony", "Vanchimala St. Antony", "Vandanmedu St. Antony",
-    "Vandanpathal St. Paul", "Vechoochira St. Joseph", "Velichiyani St. Thomas Forane",
-    "Vellaramkunnu St. Mary", "Wallardy Holy Cross", "Yendayar St. Jude"
   ]
 };
 
@@ -138,17 +95,7 @@ const renderDynamicContent = () => {
     `).join('');
   }
 
-  // 2. Render Parishes
-  if (elements.parishSelect) {
-    const sortedParishes = [...CONFIG.parishes].sort();
-    const currentVal = elements.parishSelect.value;
-    elements.parishSelect.innerHTML = `
-      <option value="" disabled selected>Select your Parish</option>
-      ${sortedParishes.map(p => `<option value="${p}">${p}</option>`).join('')}
-      <option value="other">Other</option>
-    `;
-    if (currentVal) elements.parishSelect.value = currentVal;
-  }
+  // 2. Parishes are now static in HTML
 };
 
 // --- Preloader & Animations ---
@@ -232,10 +179,25 @@ const initForm = () => {
 
       // 2. Submit Form
       btn.innerText = "Finalizing Registration...";
-      const formData = new FormData(elements.regForm);
-      formData.append(CONFIG.fields.paymentLink, uploadResp.link);
 
-      await fetch(CONFIG.regFormUrl, { method: 'POST', body: formData, mode: 'no-cors' });
+      const submissionData = new URLSearchParams();
+      const currentFormData = new FormData(elements.regForm);
+
+      // Add all text fields, skip binary file data (Google Forms rejects binary)
+      for (const [key, value] of currentFormData.entries()) {
+        if (!(value instanceof File)) {
+          submissionData.append(key, value);
+        }
+      }
+
+      // Specifically add the payment link generated from the upload
+      submissionData.append(CONFIG.fields.paymentLink, uploadResp.link);
+
+      await fetch(CONFIG.regFormUrl, {
+        method: 'POST',
+        body: submissionData,
+        mode: 'no-cors'
+      });
 
       // 3. Success UI
       handleFormSuccess();
