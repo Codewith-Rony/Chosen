@@ -53,7 +53,8 @@ const elements = {
   filePreview: document.getElementById('file-preview'),
   uploadStatus: document.getElementById('upload-status'),
   formSuccess: document.getElementById('form-success'),
-  submitBtn: document.getElementById('submit-btn')
+  submitBtn: document.getElementById('submit-btn'),
+  mobileRegBtn: document.getElementById('mobile-reg-btn')
 };
 
 // --- Initialization ---
@@ -63,6 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initIntercessions();
   initSmoothScroll();
   initRegistration();
+  initMobileRegBtn();
 });
 
 const renderDynamicContent = () => {
@@ -158,11 +160,30 @@ const initCarousel = () => {
 const initRegistration = () => {
   if (!elements.regForm) return;
 
+  // Live validation on input
+  elements.regForm.querySelectorAll('input, select, textarea').forEach(field => {
+    field.addEventListener('input', () => {
+      if (field.checkValidity()) {
+        field.closest('.form-group').classList.remove('error');
+      }
+    });
+
+    field.addEventListener('blur', () => {
+      if (!field.checkValidity()) {
+        field.closest('.form-group').classList.add('error');
+      }
+    });
+  });
+
   elements.regForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     // 1. Validate Form
-    if (!validateForm()) return;
+    if (!validateForm()) {
+      const firstError = elements.regForm.querySelector('.form-group.error');
+      if (firstError) firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
     const originalBtnText = elements.submitBtn.innerText;
 
@@ -224,17 +245,33 @@ const initRegistration = () => {
 };
 
 const validateForm = () => {
-  // Simple validation for required fields (browser already does some via 'required')
-  // We double check the file type here
+  let isValid = true;
+  const fields = elements.regForm.querySelectorAll('[required]');
+
+  fields.forEach(field => {
+    const formGroup = field.closest('.form-group');
+    if (!field.checkValidity()) {
+      formGroup.classList.add('error');
+      isValid = false;
+    } else {
+      formGroup.classList.remove('error');
+    }
+  });
+
+  // Special check for file type
   const file = elements.fileInput.files[0];
   if (file) {
     const validTypes = ['image/jpeg', 'image/jpg', 'image/png'];
+    const fileGroup = elements.fileInput.closest('.form-group');
     if (!validTypes.includes(file.type)) {
-      alert("Please upload a valid image file (JPG, JPEG, or PNG).");
-      return false;
+      fileGroup.classList.add('error');
+      const errorMsg = fileGroup.querySelector('.error-message');
+      if (errorMsg) errorMsg.innerText = "Please upload a valid image (JPG, JPEG, or PNG).";
+      isValid = false;
     }
   }
-  return true;
+
+  return isValid;
 };
 
 const setLoadingState = (isLoading, btnText = "Submit Registration") => {
@@ -409,3 +446,64 @@ const initSmoothScroll = () => {
     });
   });
 };
+
+// --- UPI Copy Function ---
+const copyUPI = () => {
+  const upiId = document.getElementById('upi-id-display').innerText;
+  navigator.clipboard.writeText(upiId).then(() => {
+    const btn = document.querySelector('.copy-btn');
+    const originalText = btn.innerText;
+    btn.innerText = "Copied!";
+    btn.style.background = "#28a745";
+    btn.style.color = "#fff";
+    setTimeout(() => {
+      btn.innerText = originalText;
+      btn.style.background = "";
+      btn.style.color = "";
+    }, 2000);
+  }).catch(err => {
+    console.error('Failed to copy: ', err);
+  });
+};
+
+const initMobileRegBtn = () => {
+  if (!elements.mobileRegBtn) return;
+
+  const heroSection = document.getElementById('hero');
+  const regSection = document.getElementById('register');
+  if (!heroSection || !regSection) return;
+
+  const handleScroll = () => {
+    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+    const regTop = regSection.offsetTop;
+    const scrollPos = window.scrollY + window.innerHeight;
+
+    // Show only between Hero and Registration sections
+    if (window.scrollY > heroBottom - 100 && window.scrollY < regTop - 100) {
+      elements.mobileRegBtn.classList.add('show');
+    } else {
+      elements.mobileRegBtn.classList.remove('show');
+    }
+  };
+
+  window.addEventListener('scroll', handleScroll);
+  handleScroll();
+};
+
+const updateUPILinks = (amount) => {
+  const baseUri = `upi://pay?pa=9074568307@ptyes&pn=Sreyas%20Amal%20Raj&am=${amount}&cu=INR&tn=Chosen%202026%20Registration`;
+  const apps = ['gpay', 'phonepe', 'paytm'];
+
+  apps.forEach(app => {
+    const el = document.getElementById(`upi-${app}`);
+    if (el) el.setAttribute('href', baseUri);
+  });
+
+  // Also update the QR label if it exists to remind the user
+  const qrLabel = document.querySelector('.qr-label');
+  if (qrLabel) qrLabel.innerText = `Scan to Pay ₹${amount}`;
+};
+
+window.updateUPILinks = updateUPILinks;
+
+window.copyUPI = copyUPI;
