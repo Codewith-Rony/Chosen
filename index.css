@@ -569,6 +569,14 @@ nav {
     text-align: center;
 }
 
+.stepper .unit {
+    font-size: 13px;
+    font-weight: 500;
+    margin-left: -5px;
+    color: #666;
+    margin-right: 5px;
+}
+
 .offer-btn {
     width: 100%;
     padding: 10px;
@@ -1432,6 +1440,39 @@ footer {
     .intercession-grid::-webkit-scrollbar-thumb {
         background: var(--gold-accent);
         border-radius: 10px;
+    }
+
+    /* Highlights Mobile - 2 in a row */
+    .highlights-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .highlight-item {
+        padding: 30px 15px;
+        border-radius: 10px;
+    }
+
+    .item-icon {
+        width: 48px;
+        height: 48px;
+        margin-bottom: 15px;
+        border-radius: 8px;
+    }
+
+    .item-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .highlight-item h3 {
+        font-size: 16px;
+        margin-bottom: 8px;
+    }
+
+    .highlight-item p {
+        font-size: 12px;
+        line-height: 1.4;
     }
 
     .tagline {

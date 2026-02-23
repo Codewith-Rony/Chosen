@@ -21,12 +21,12 @@ const CONFIG = {
   },
   intercessions: [
     { type: "Hail Mary", description: "Interceding through our Blessed Mother." },
-    { type: "Our Father", description: "Praying as Jesus taught us." },
     { type: "Memorare", description: "Seeking the protection of Mary." },
     { type: "Creed", description: "Proclaiming our shared faith." },
     { type: "Rosary", description: "Meditating on the mysteries." },
     { type: "Mercy Rosary", description: "Appealing to His Divine Mercy." },
     { type: "Holy Mass", description: "The source and summit of life." },
+    { type: "Adoration", description: "Spending time with Jesus in the Blessed Sacrament." },
     { type: "Fasting", description: "Sacrificing for his glory." }
   ]
 };
@@ -37,7 +37,7 @@ let state = {
   slideTimer: null,
   isSubmitted: false,
   localPrayers: {
-    "Hail Mary": 0, "Our Father": 0, "Memorare": 0, "Creed": 0,
+    "Hail Mary": 0, "Adoration": 0, "Memorare": 0, "Creed": 0,
     "Rosary": 0, "Mercy Rosary": 0, "Holy Mass": 0, "Fasting": 0
   }
 };
@@ -70,31 +70,35 @@ document.addEventListener('DOMContentLoaded', () => {
 const renderDynamicContent = () => {
   // 1. Render Intercessions
   if (elements.intercessionGrid) {
-    elements.intercessionGrid.innerHTML = CONFIG.intercessions.map(p => `
-      <div class="intercession-card" data-prayer="${p.type}" id="card-${p.type.toLowerCase().replace(/\s+/g, '-')}">
+    elements.intercessionGrid.innerHTML = CONFIG.intercessions.map(p => {
+      const isAdoration = p.type === 'Adoration';
+      const idPrefix = p.type.toLowerCase().replace(/\s+/g, '-');
+      return `
+      <div class="intercession-card" data-prayer="${p.type}" id="card-${idPrefix}">
         <div class="card-main">
           <h3>${p.type}</h3>
-          <div class="count" id="count-${p.type.toLowerCase().replace(/\s+/g, '-')}">...</div>
-          <p class="count-label">Global Total</p>
+          <div class="count" id="count-${idPrefix}">...</div>
+          <p class="count-label">Global Total${isAdoration ? ' (hrs)' : ''}</p>
           <div class="user-controls">
             <div class="stepper">
               <button onclick="changeLocalCount('${p.type}', -1)">−</button>
-              <span id="local-${p.type.toLowerCase().replace(/\s+/g, '-')}">0</span>
+              <span id="local-${idPrefix}">0</span>${isAdoration ? ' <span class="unit">hrs</span>' : ''}
               <button onclick="changeLocalCount('${p.type}', 1)">+</button>
             </div>
-            <button class="offer-btn" onclick="submitLocalPrayers('${p.type}')">Offer Prayers</button>
+            <button class="offer-btn" onclick="submitLocalPrayers('${p.type}')">${isAdoration ? 'Offer Hours' : 'Offer Prayers'}</button>
           </div>
         </div>
         <div class="card-thanks">
           <div class="thanks-content">
             <span>✨</span>
-            <h4>Thank you for the prayers!</h4>
+            <h4>Thank you for the ${isAdoration ? 'time!' : 'prayers!'}</h4>
             <p>${p.description}</p>
-            <button class="reset-btn" onclick="resetCard('${p.type}')">Pray More</button>
+            <button class="reset-btn" onclick="resetCard('${p.type}')">${isAdoration ? 'Spend More' : 'Pray More'}</button>
           </div>
         </div>
       </div>
-    `).join('');
+    `;
+    }).join('');
   }
 
   // 2. Parishes are now static in HTML
