@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Volunteers Registration | CHOSEN 2026</title>
+
+    <!-- Privacy & SEO: Prevent indexing -->
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="googlebot" content="noindex, nofollow">
+
+    <!-- Fonts -->
+    <link
+        href="https://api.fontshare.com/v2/css?f[]=gambarino@400&f[]=ranade@100,200,300,400,500,700,800,900&display=swap"
+        rel="stylesheet">
+
+    <!-- Primary CSS -->
+    <link rel="stylesheet" href="index.css">
+
+    <style>
+        :root {
+            --form-bg: #161616;
+            --input-bg: #222;
+            --input-border: #333;
+            --success-color: #4BB543;
+        }
+
+        body {
+            background-color: var(--primary-black);
+            color: var(--off-white);
+        }
+
+        .volunteer-container {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .header-section h1 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 15px;
+            color: var(--gold-accent);
+        }
+
+        .intro-note {
+            background: rgba(255, 194, 0, 0.1);
+            border-left: 4px solid var(--gold-accent);
+            padding: 20px;
+            margin-bottom: 40px;
+            border-radius: 4px;
+        }
+
+        .intro-note p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .program-info-box {
+            background: var(--form-bg);
+            border: 1px solid var(--input-border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item h4 {
+            color: var(--gold-accent);
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .info-item p {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .volunteer-form {
+            background: var(--form-bg);
+            padding: 40px;
+            border-radius: 16px;
+            border: 1px solid var(--input-border);
+        }
+
+        .form-section-title {
+            font-family: var(--font-heading);
+            font-size: 24px;
+            margin: 30px 0 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--input-border);
+            color: white;
+        }
+
+        .form-section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .full-width {
+            grid-column: span 2;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: white;
+            border-radius: 6px;
+            font-family: var(--font-body);
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--gold-accent);
+            background: #2a2a2a;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            background: var(--input-bg);
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--input-border);
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .checkbox-item input {
+            width: auto;
+            cursor: pointer;
+        }
+
+        .loading-overlay {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .success-container {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .success-icon {
+            font-size: 64px;
+            color: var(--gold-accent);
+            margin-bottom: 20px;
+        }
+
+        .availability-extra {
+            display: none;
+            margin-top: 15px;
+        }
+
+        .contact-footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 40px 0;
+            border-top: 1px solid var(--input-border);
+            font-size: 14px;
+            color: #888;
+        }
+
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .full-width {
+                grid-column: span 1;
+            }
+
+            .volunteer-form {
+                padding: 25px;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Preloader (Optional, but kept for consistency) -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <img src="assets/Preloader.png" alt="Holy Spirit Pigeon" class="pigeon-loader">
+            <p class="preloader-caption">Join the mission...</p>
+        </div>
+    </div>
+
+    <main class="volunteer-container reveal">
+        <div class="header-section">
+            <img src="assets/Chosen logo- White.png" alt="Chosen Logo" style="height: 60px; margin: 0 auto 30px;">
+            <h1>CHOSEN 2026 – Volunteers Registration</h1>
+            <p
+                style="font-size: 18px; opacity: 0.9; max-width: 600px; margin: 10px auto 0; font-family: var(--font-heading);">
+                "As each has received a gift, use it to serve one another, as good stewards of God's varied grace."
+            </p>
+        </div>
+
+        <div class="intro-note">
+            <h3>Why we need you</h3>
+            <p>CHOSEN 2026 is more than just a program; it is a mission to touch the lives of teenagers. We need
+                dedicated volunteers who understand that this is a <strong>service</strong> to the Lord, not just
+                helping out. Your presence and prayers are the backbone of this journey.</p>
+            <p style="margin-top: 15px; font-weight: 600; color: var(--gold-accent);">* This form is strictly for
+                volunteers. Please fill this only if you are willing to serve heartfully during the program.</p>
+        </div>
+
+        <div class="program-info-box">
+            <div class="info-item">
+                <h4>Program</h4>
+                <p>CHOSEN 2026</p>
+            </div>
+            <div class="info-item">
+                <h4>Dates</h4>
+                <p>April 13 (5 PM) – April 16 (4 PM)</p>
+            </div>
+            <div class="info-item">
+                <h4>Venue</h4>
+                <p>AKJM School, Kanjirappally</p>
+            </div>
+
+        </div>
+
+        <div id="form-container">
+            <form id="volunteer-registration-form" class="volunteer-form">
+                <h3 class="form-section-title">Basic Details</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Full Name*</label>
+                        <input type="text" id="name" name="entry.621551616" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Age*</label>
+                        <input type="number" id="age" name="entry.857494556" required placeholder="Your age">
+                    </div>
+                    <div class="form-group">
+                        <label for="parish">Parish*</label>
+                        <input type="text" id="parish" name="entry.1930450021" required placeholder="Parish">
+                    </div>
+                    <div class="form-group">
+                        <label for="zone">Zone*</label>
+                        <input type="text" id="zone" name="entry.2100924150" required placeholder="Your Zone">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number*</label>
+                        <input type="tel" id="phone" name="entry.1700546849" required pattern="[0-9]{10}"
+                            placeholder="10-digit mobile number">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email ID*</label>
+                        <input type="email" id="email" name="entry.650423779" required placeholder="yourname@email.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="profession">Profession*</label>
+                        <select id="profession" name="entry.484955764" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="Student">Student</option>
+                            <option value="Working">Working</option>
+                            <option value="Others">Others</option>
+                        </select>
+                    </div>
+                </div>
+
+                <h3 class="form-section-title">JY Information</h3>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="jy_experience">JY Experience*</label>
+                        <select id="jy_experience" name="entry.1880896446" required>
+                            <option value="" disabled selected>Select duration</option>
+                            <option value="Less than 6 months">Less than 6 months</option>
+                            <option value="1 Year">1 Year</option>
+                            <option value="2 Years">2 Years</option>
+                            <option value="3 Years">3 Years</option>
+                            <option value="4 Years">4 Years</option>
+                            <option value="5+ Years">5+ Years</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="interested_ministry">Interested Ministry (If Any)</label>
+                        <input type="text" id="interested_ministry" name="entry.1594099406"
+                            placeholder="e.g., Music, Media, Intercession">
+                    </div>
+                </div>
+
+                <h3 class="form-section-title">Experience</h3>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="previous_experience">Any previous experience in working with ministries?</label>
+                        <textarea id="previous_experience" name="entry.45916909" rows="2"
+                            placeholder="Describe your previous experience"></textarea>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="major_programs">Major programs attended (if any)</label>
+                        <textarea id="major_programs" name="entry.961224152" rows="2"
+                            placeholder="List major programs you have attended"></textarea>
+                    </div>
+                </div>
+
+                <h3 class="form-section-title">Training & Availability</h3>
+                <div class="form-grid">
+                    <div class="form-group full-width">
+                        <label for="training_willingness">Are you willing to attend volunteers training before the
+                            program?*</label>
+                        <select id="training_willingness" name="entry.1978575858" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div class="form-group full-width">
+                        <label for="availability_5days">Will you be available for all 5 days of the program?*</label>
+                        <select id="availability_5days" name="entry.1596111592" required
+                            onchange="toggleAvailabilityDetails(this.value)">
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="Yes">Yes</option>
+                            <option value="No">No</option>
+                        </select>
+                    </div>
+                    <div id="availability-extra-info" class="availability-extra full-width">
+                        <div class="form-group">
+                            <label for="availability_details">If not available, Enter the days you are
+                                available*</label>
+                            <input type="text" id="availability_details" name="entry.1530935288"
+                                placeholder="Enter days/dates of availability">
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 40px;">
+                    <button type="submit" id="submit-btn" class="btn btn-primary large" style="width: 100%;">Submit
+                        Registration</button>
+                </div>
+
+                <div class="loading-overlay" id="loading-state">
+                    <p class="gold-text">Submitting your registration...</p>
+                </div>
+            </form>
+        </div>
+
+        <div id="success-message" class="success-container">
+            <div class="success-icon">✨</div>
+            <h2>Registration Successful!</h2>
+            <p>Thank you for registering as a volunteer for CHOSEN 2026. We will contact you soon.</p>
+            <div style="margin-top: 30px;">
+                <a href="index.html" class="btn btn-outline">Back to Home</a>
+            </div>
+        </div>
+
+        <footer class="contact-footer">
+            <p>Coordinator: Rony | <a href="tel:+918590934207">+91 85909 34207</a></p>
+            <p>&copy; 2026 Chosen Jesus Youth Teens Ministry. All Rights Reserved.</p>
+        </footer>
+    </main>
+
+    <script src="volunteers-registration.js"></script>
+    <script>
+        // Inline UI logic
+        function toggleAvailabilityDetails(val) {
+            const extra = document.getElementById('availability-extra-info');
+            const input = document.getElementById('availability_details');
+            if (val === 'No') {
+                extra.style.display = 'block';
+                input.required = true;
+            } else {
+                extra.style.display = 'none';
+                input.required = false;
+            }
+        }
+
+        // Handle preloader
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    document.querySelector('.reveal').classList.add('active');
+                }, 800);
+            }, 1000);
+        });
+    </script>
+</body>
+
+</html>
