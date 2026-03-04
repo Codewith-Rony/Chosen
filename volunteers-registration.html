@@ -191,6 +191,60 @@
             margin-top: 15px;
         }
 
+        .whatsapp-box {
+            background: rgba(37, 211, 102, 0.1);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            border-radius: 16px;
+            padding: 30px;
+            margin: 40px auto;
+            max-width: 500px;
+            border-left: 4px solid #25D366;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .whatsapp-box:hover {
+            transform: translateY(-5px);
+            background: rgba(37, 211, 102, 0.15);
+        }
+
+        .whatsapp-box h3 {
+            color: #25D366;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-family: var(--font-heading);
+        }
+
+        .whatsapp-box p {
+            font-size: 15px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            color: #ddd;
+        }
+
+        .whatsapp-btn {
+            background: #25D366;
+            color: white !important;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .whatsapp-btn:hover {
+            background: #128C7E;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+            transform: scale(1.02);
+        }
+
         .contact-footer {
             text-align: center;
             margin-top: 60px;
@@ -282,7 +336,19 @@
                     </div>
                     <div class="form-group">
                         <label for="zone">Zone*</label>
-                        <input type="text" id="zone" name="entry.2100924150" required placeholder="Your Zone">
+                        <select id="zone" name="entry.2100924150" required>
+                            <option value="" disabled selected>Select your Zone</option>
+                            <option value="Kanjirappally">Kanjirappally</option>
+                            <option value="Pala">Pala</option>
+                            <option value="Chaganaserry">Chaganaserry</option>
+                            <option value="Kottayam">Kottayam</option>
+                            <option value="Ernakulam">Ernakulam</option>
+                            <option value="Palakkad">Palakkad</option>
+                            <option value="Thrissur">Thrissur</option>
+                            <option value="Trivandrum">Trivandrum</option>
+                            <option value="Kattapana">Kattapana</option>
+                            <option value="Others">Others</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="phone">Phone Number*</label>
@@ -318,10 +384,25 @@
                             <option value="5+ Years">5+ Years</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="interested_ministry">Interested Ministry (If Any)</label>
-                        <input type="text" id="interested_ministry" name="entry.1594099406"
-                            placeholder="e.g., Music, Media, Intercession">
+                    <div class="form-group full-width">
+                        <label for="interested_ministry">Current or Interested Ministry*</label>
+                        <select id="interested_ministry" name="entry.1594099406" required>
+                            <option value="" disabled selected>Select an option</option>
+                            <option value="Program">Program</option>
+                            <option value="Music">Music</option>
+                            <option value="Media">Media</option>
+                            <option value="Arts">Arts</option>
+                            <option value="Theater">Theater</option>
+                            <option value="Any Ministry">Any Ministry</option>
+                            <option value="Kitchen">Kitchen</option>
+                            <option value="Finance">Finance</option>
+                            <option value="Resource Care">Resource Care</option>
+                            <option value="Local Arrangement">Local Arrangement</option>
+                            <option value="Cleaning">Cleaning</option>
+                            <option value="Accomodation">Accomodation</option>
+                            <option value="Security">Security</option>
+                            <option value="General Volunteer">General Volunteer</option>
+                        </select>
                     </div>
                 </div>
 
@@ -335,7 +416,7 @@
                     <div class="form-group full-width">
                         <label for="major_programs">Major programs attended (if any)</label>
                         <textarea id="major_programs" name="entry.961224152" rows="2"
-                            placeholder="List major programs you have attended"></textarea>
+                            placeholder="Eg: Jaago, Training Programs, KCC, NCC, etc."></textarea>
                     </div>
                 </div>
 
@@ -384,6 +465,23 @@
             <div class="success-icon">✨</div>
             <h2>Registration Successful!</h2>
             <p>Thank you for registering as a volunteer for CHOSEN 2026. We will contact you soon.</p>
+
+            <div class="whatsapp-box">
+                <h3>
+                    <svg viewBox="0 0 24 24" width="24" height="24" fill="currentColor">
+                        <path
+                            d="M12.031 6.172c-2.32 0-4.518.903-6.157 2.543a8.653 8.653 0 0 0-2.543 6.157c0 1.979.673 3.847 1.905 5.352L4 23.32l3.414-1.246c1.444.786 3.072 1.203 4.62 1.203 2.321 0 4.52-.903 6.159-2.543 1.639-1.639 2.543-3.837 2.543-6.157s-.904-4.52-2.543-6.159c-1.639-1.641-3.839-2.543-6.162-2.543zM12.031 21.033c-1.579 0-3.08-.415-4.403-1.203l-.316-.188-1.996.729.742-1.956-.205-.328a7.481 7.481 0 0 1-1.125-3.882c0-4.14 3.368-7.509 7.509-7.509s7.509 3.368 7.509 7.509c0 4.14-3.368 7.509-7.509 7.509zm4.125-5.636c-.225-.113-1.332-.656-1.539-.731-.206-.075-.356-.113-.506.113s-.581.731-.712.881c-.131.15-.262.169-.487.056-.225-.113-.951-.351-1.812-1.119-.671-.599-1.125-1.338-1.256-1.564-.131-.225-.014-.348.099-.461.101-.101.225-.262.338-.394.113-.131.15-.225.225-.375.075-.15.038-.281-.019-.394-.056-.113-.506-1.219-.694-1.669-.183-.439-.369-.379-.506-.386-.131-.005-.281-.006-.431-.006s-.394.056-.6.281c-.206.225-.787.769-.787 1.875s.806 2.175.918 2.325c.113.15 1.583 2.417 3.836 3.391.536.231.954.369 1.28.473.538.172 1.028.148 1.415.09.431-.065 1.332-.544 1.52.1.069.188.469 1.132.469 1.132.536.213.15.356.12.581-.03c.225-.113.844-.731 1.069-.881z" />
+                    </svg>
+                    Join Volunteer Community
+                </h3>
+                <p>To stay updated with meeting schedules and volunteer coordination, please join our official WhatsApp
+                    group.</p>
+                <a href="https://chat.whatsapp.com/FnTGxngB8QgC5jktHOFb5t?mode=gi_t" target="_blank"
+                    class="whatsapp-btn">
+                    Join WhatsApp Group
+                </a>
+            </div>
+
             <div style="margin-top: 30px;">
                 <a href="index.html" class="btn btn-outline">Back to Home</a>
             </div>
