@@ -495,7 +495,7 @@ const initMobileRegBtn = () => {
 };
 
 const updateUPILinks = (amount) => {
-  const baseUri = `upi://pay?pa=9074568307@ptyes&pn=Sreyas%20Amal%20Raj&am=${amount}&cu=INR&tn=Chosen%202026%20Registration`;
+  const baseUri = `upi://pay?pa=9074568307@okicici&pn=Sreyas%20Amal%20Raj&am=${amount}&cu=INR&tn=Chosen%202026%20Registration`;
   const apps = ['gpay', 'phonepe', 'paytm'];
 
   apps.forEach(app => {
