@@ -495,13 +495,13 @@ const initMobileRegBtn = () => {
 };
 
 const updateUPILinks = (amount) => {
-  const baseUri = `upi://pay?pa=9074568307-2@ybl&pn=Sreyas%20Amal%20Raj&am=${amount}&cu=INR&tn=Chosen%202026%20Registration`;
-  const apps = ['gpay', 'phonepe', 'paytm'];
+  const upiString = `upi://pay?pa=9074568307-2@ybl&pn=Sreyas%20Amal%20Raj&am=${amount}&cu=INR&tn=Chosen%202026%20Registration`;
 
-  apps.forEach(app => {
-    const el = document.getElementById(`upi-${app}`);
-    if (el) el.setAttribute('href', baseUri);
-  });
+  // Dynamically update the QR code to reflect the New UPI ID & Amount!
+  const qrImg = document.querySelector('.payment-qr');
+  if (qrImg) {
+    qrImg.src = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
+  }
 
   // Also update the QR label if it exists to remind the user
   const qrLabel = document.querySelector('.qr-label');

@@ -566,7 +566,7 @@
                                     amount via QR/Bank and upload the screenshot.</p>
                                 <div class="payment-flex-container">
                                     <div class="qr-code-wrapper">
-                                        <img src="assets/QR.jpeg" alt="Scan to pay ₹500" class="payment-qr">
+                                        <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=upi%3A%2F%2Fpay%3Fpa%3D9074568307-2%40ybl%26pn%3DSreyas%2520Amal%2520Raj%26am%3D500%26cu%3DINR%26tn%3DChosen%25202026%2520Registration" alt="Scan to pay ₹500" class="payment-qr">
                                         <p class="qr-label">Scan to Pay</p>
                                     </div>
                                     <div class="bank-details">
@@ -580,7 +580,7 @@
 
                                 <!-- UPI Apps Section -->
                                 <div class="upi-pay-section">
-                                    <h4 class="upi-title">Quick Pay via UPI App</h4>
+                                    <h4 class="upi-title">Choose Payment Amount</h4>
 
                                     <!-- Amount Selector -->
                                     <div class="amount-selector">
@@ -596,30 +596,10 @@
                                         </label>
                                     </div>
 
-                                    <div class="upi-buttons-grid">
-                                        <a href="upi://pay?pa=9074568307-2@ybl&pn=Sreyas%20Amal%20Raj&am=500&cu=INR&tn=Chosen%202026%20Registration"
-                                            id="upi-gpay" class="upi-btn gpay">
-                                            <img src="assets/google-pay-icon.webp" alt="GPay" class="upi-logo">
-                                            <span>G-Pay</span>
-                                        </a>
-                                        <a href="upi://pay?pa=9074568307-2@ybl&pn=Sreyas%20Amal%20Raj&am=500&cu=INR&tn=Chosen%202026%20Registration"
-                                            id="upi-phonepe" class="upi-btn phonepe">
-                                            <img src="assets/phonepe-icon.png" alt="PhonePe" class="upi-logo">
-                                            <span>PhonePe</span>
-                                        </a>
-                                        <a href="upi://pay?pa=9074568307-2@ybl&pn=Sreyas%20Amal%20Raj&am=500&cu=INR&tn=Chosen%202026%20Registration"
-                                            id="upi-paytm" class="upi-btn paytm">
-                                            <img src="assets/paytm-icon.png" alt="Paytm" class="upi-logo">
-                                            <span>Paytm</span>
-                                        </a>
-                                    </div>
                                     <div class="copy-upi-box">
                                         <span class="upi-id-text" id="upi-id-display">9074568307-2@ybl</span>
                                         <button type="button" class="copy-btn" onclick="copyUPI()">Copy ID</button>
                                     </div>
-                                    <p class="mobile-only-note"
-                                        style="font-size: 10px; color: #888; margin-top: 10px; text-align: center;">*
-                                        UPI links work best on mobile devices with installed apps.</p>
 
                                     <!-- Payment Reminder Message -->
                                     <div class="payment-reminder">
