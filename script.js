@@ -343,7 +343,21 @@ const toggleOtherParish = (val) => {
 
 window.toggleOtherParish = toggleOtherParish;
 
+// --- Source Toggle Logic ---
+const toggleOtherSource = (val) => {
+  const group = document.getElementById('other-source-group');
+  const input = document.getElementById('other_source');
 
+  const isOther = val === 'Other';
+  group.style.display = isOther ? 'block' : 'none';
+  input.required = isOther;
+
+  if (!isOther) {
+    input.value = ''; // Clear if they switch back
+  }
+};
+
+window.toggleOtherSource = toggleOtherSource;
 
 // --- Community Intercessions ---
 const initIntercessions = () => {

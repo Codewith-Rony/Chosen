@@ -559,6 +559,37 @@
                             <span class="error-message">Please enter your school name</span>
                         </div>
 
+                        <!-- Attended Before -->
+                        <div class="form-group">
+                            <label for="attended_before">Have you attended Chosen before?*</label>
+                            <select id="attended_before" name="entry.775695981" required>
+                                <option value="" disabled selected>Select an option</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </select>
+                            <span class="error-message">Please make a selection</span>
+                        </div>
+
+                        <!-- Source -->
+                        <div class="form-group">
+                            <label for="source">How did you get to know about Chosen?*</label>
+                            <select id="source" name="entry.1946289790" required onchange="toggleOtherSource(this.value)">
+                                <option value="" disabled selected>Select Source</option>
+                                <option value="Friends and Relatives">Friends and Relatives</option>
+                                <option value="Social Media">Social Media</option>
+                                <option value="Priest and Religious">Priest and Religious</option>
+                                <option value="Other">Other</option>
+                            </select>
+                            <span class="error-message">Please select a source</span>
+                        </div>
+
+                        <!-- Other Source -->
+                        <div class="form-group full-width" id="other-source-group" style="display:none;">
+                            <label for="other_source">If other, please specify*</label>
+                            <input type="text" id="other_source" name="entry.298109189" placeholder="Specify here">
+                            <span class="error-message">Please specify</span>
+                        </div>
+
                         <!-- Payment Screenshot Info -->
                         <div class="form-group full-width payment-info-section">
                             <div class="payment-instructions">
