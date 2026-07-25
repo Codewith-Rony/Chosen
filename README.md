@@ -1,4 +1,4 @@
-# ✨ Chosen – Ministry Event Website
+#  Chosen – Ministry Event Website
 
 A modern, responsive event website developed for **Jesus Youth Kanjirapally** to promote the **Chosen** ministry program, provide event information, and streamline participant registration.
 
@@ -15,7 +15,7 @@ Chosen is a responsive event website developed for the **Jesus Youth Kanjirapall
 The registration interface was custom-built as part of the website and integrated with **Google Forms** to collect and store participant responses efficiently, eliminating the need for manual registration management.
 ---
 
-## ✨ Features
+##  Features
 
 - 📱 Fully responsive design
 - 🎨 Modern user interface
