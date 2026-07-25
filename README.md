@@ -20,9 +20,6 @@ The registration interface was custom-built as part of the website and integrate
 - 📱 Fully responsive design
 - 🎨 Modern user interface
 - ✨ Smooth scrolling and animations
-- ⏳ Countdown timer
-- 🖼 Image gallery
-- 🎥 Video section
 - 📝 Custom registration form integrated with Google Forms
 - 📞 Contact section
 - ⚡ Optimized for performancerformance and fast loading
@@ -74,9 +71,6 @@ chosen/
 
 ![About](screenshots/about.png)
 
-### Gallery
-
-![Gallery](screenshots/gallery.png)
 
 ### Registration
 
